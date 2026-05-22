@@ -167,13 +167,12 @@ export const HomeView: React.FC<HomeViewProps> = ({
             
             <button 
               onClick={() => navigateTo('about')}
-              className="group relative mt-12 px-16 py-8 border border-[#8B5E3C]/30 hover:border-[#8B5E3C] transition-all duration-700 cursor-none overflow-hidden inline-flex items-center gap-8"
+              className="group mt-12 px-16 py-6 md:py-8 bg-[#8B5E3C] text-white hover:bg-black transition-colors duration-700 cursor-none inline-flex items-center gap-8 shadow-xl"
             >
-              <div className="absolute inset-0 bg-[#8B5E3C] translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[0.16,1,0.3,1]" />
-              <span className="relative z-10 font-sans text-[11px] uppercase tracking-[0.5em] text-[#8B5E3C] group-hover:text-white transition-colors duration-700">
+              <span className="font-sans text-[11px] uppercase tracking-[0.5em]">
                 The Full Narrative
               </span>
-              <ArrowRight size={16} className="relative z-10 text-[#8B5E3C] group-hover:text-white group-hover:translate-x-2 transition-all duration-700" />
+              <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform duration-700" />
             </button>
           </div>
         </motion.div>
