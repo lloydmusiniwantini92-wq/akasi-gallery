@@ -4,7 +4,7 @@ import { EditorialReveal } from './EditorialReveal';
 import { ArrowRight } from 'lucide-react';
 
 export const Exhibitions: React.FC = () => (
-  <section className="bg-black text-white py-24 md:py-32 px-8 md:px-24 border-t border-white/10">
+  <section className="bg-[#F9F8F6] text-black py-24 md:py-32 px-8 md:px-24 border-t border-black/5">
     <div className="max-w-7xl mx-auto">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-12 mb-20">
         <div className="space-y-4">
@@ -16,35 +16,35 @@ export const Exhibitions: React.FC = () => (
           </EditorialReveal>
         </div>
         <EditorialReveal delay={0.3}>
-          <p className="font-sans text-sm md:text-base text-white/60 max-w-sm leading-loose">
+          <p className="font-sans text-sm md:text-base text-black/60 max-w-sm leading-loose">
             Join us for exclusive physical directives, private viewings, and artist talks.
           </p>
         </EditorialReveal>
       </div>
 
-      <div className="flex flex-col border-t border-white/10">
+      <div className="flex flex-col border-t border-black/5">
         {EXHIBITIONS.map((event, i) => (
           <EditorialReveal key={i} delay={0.2 + (i * 0.1)}>
-            <div className="group flex flex-col md:flex-row items-start md:items-center justify-between py-8 md:py-12 border-b border-white/10 hover:bg-white/5 transition-colors duration-500 px-4 md:px-8 cursor-none">
+            <div className="group flex flex-col md:flex-row items-start md:items-center justify-between py-8 md:py-12 border-b border-black/5 hover:bg-[#D9D2C5]/30 transition-colors duration-500 px-4 md:px-8 cursor-none">
               <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-16 w-full md:w-auto mb-6 md:mb-0">
                 <p className="font-mono text-sm md:text-base tracking-[0.2em] text-[#C5A059] font-bold w-24">
                   {event.date}
                 </p>
                 <div className="space-y-1">
-                  <h3 className="font-serif text-2xl md:text-4xl tracking-tight uppercase text-white group-hover:translate-x-2 transition-transform duration-500">
+                  <h3 className="font-serif text-2xl md:text-4xl tracking-tight uppercase text-black group-hover:translate-x-2 transition-transform duration-500">
                     {event.title}
                   </h3>
-                  <p className="font-sans text-xs uppercase tracking-widest text-white/40 mt-1">
+                  <p className="font-sans text-xs uppercase tracking-widest text-black/40 mt-1">
                     {event.location}
                   </p>
                 </div>
               </div>
               <div className="flex items-center justify-between w-full md:w-auto gap-8">
-                <span className="font-mono text-[9px] uppercase tracking-[0.4em] text-white/50 px-4 py-2 border border-white/20 rounded-full group-hover:border-[#C5A059] group-hover:text-[#C5A059] transition-colors">
+                <span className="font-mono text-[9px] uppercase tracking-[0.4em] text-black/50 px-4 py-2 border border-black/20 rounded-full group-hover:border-[#C5A059] group-hover:text-[#C5A059] transition-colors bg-transparent">
                   {event.status}
                 </span>
-                <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:border-white transition-all duration-500">
-                  <ArrowRight size={14} className="text-white group-hover:text-black group-hover:translate-x-1 transition-transform" />
+                <div className="w-10 h-10 rounded-full border border-black/20 flex items-center justify-center group-hover:bg-[#C5A059] group-hover:border-[#C5A059] transition-all duration-500">
+                  <ArrowRight size={14} className="text-black group-hover:text-white group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
             </div>
