@@ -223,8 +223,8 @@ export const HomeView: React.FC<HomeViewProps> = ({
               whileInView={{ opacity: 1, y: 0, scale: 1 }} 
               viewport={{ once: true, margin: "-15%" }} 
               transition={{ duration: 1.5, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }} 
-              onMouseEnter={() => setHoveredId(i)}
-              onMouseLeave={() => setHoveredId(null)}
+              onPointerEnter={(e) => { if (e.pointerType === 'mouse') setHoveredId(i); }}
+              onPointerLeave={(e) => { if (e.pointerType === 'mouse') setHoveredId(null); }}
               className="group relative cursor-none flex-none w-[85vw] md:w-[450px] snap-center"
             >
               <div className="relative aspect-[4/5] overflow-hidden bg-stone-200 shadow-xl border border-black/5">
@@ -304,7 +304,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
                    viewport={{ once: true, margin: "-15%" }}
                    transition={{ duration: 1.5, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                   onMouseEnter={() => setActiveAccordion(i)}
+                   onPointerEnter={(e) => { if (e.pointerType === 'mouse') setActiveAccordion(i); }}
                    className={`relative group overflow-hidden border border-black/5 shadow-xl md:shadow-2xl bg-[#0a0a0a] transition-all duration-700 ease-[0.16,1,0.3,1] ${
                      isActive ? 'md:flex-[6]' : 'md:flex-[1]'
                    } aspect-[4/5] md:aspect-auto flex-none w-[85vw] md:w-auto snap-center cursor-none`}
