@@ -101,7 +101,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
           const section = document.getElementById('masterpieces');
           section?.scrollIntoView({ behavior: 'smooth' });
         }}
-        className="absolute bottom-12 right-8 md:bottom-24 md:right-24 z-30 group flex items-center gap-6 cursor-none"
+        className="absolute bottom-20 right-6 md:bottom-24 md:right-24 z-30 group flex items-center gap-6 cursor-none"
       >
         <div className="flex flex-col items-end drop-shadow-md">
           <span className="font-mono text-[9px] uppercase tracking-[0.5em] text-white md:text-[#C5A059] font-bold md:font-normal group-hover:text-white transition-colors duration-700 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">Begin Narrative</span>

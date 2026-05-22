@@ -125,7 +125,7 @@ export const MenuOverlay: React.FC<MenuOverlayProps> = ({
         exit={{ opacity: 0 }}
         className="fixed inset-0 z-[2000] bg-black flex"
       >
-        <div className="w-full md:w-1/2 h-full p-8 md:p-12 lg:p-16 xl:p-24 flex flex-col justify-between border-r border-black/5 bg-[#D9D2C5]">
+        <div className="w-full md:w-1/2 h-full p-6 md:p-12 lg:p-16 xl:p-24 flex flex-col justify-between border-r border-black/5 bg-[#D9D2C5] overflow-y-auto">
           <div className="space-y-2">
             {NAV_ITEMS.map((item, i) => (
               <motion.div
@@ -140,7 +140,7 @@ export const MenuOverlay: React.FC<MenuOverlayProps> = ({
               >
                 <div className="relative">
                   <span className="font-mono text-[10px] text-[#8B5E3C] absolute -top-4 left-0 opacity-0 group-hover:opacity-100 transition-opacity">0{i+1}</span>
-                  <h2 className="font-serif text-[10vw] md:text-[5.5vw] xl:text-8xl text-black/80 tracking-tighter group-hover:translate-x-8 transition-transform duration-700 italic font-light whitespace-nowrap">
+                  <h2 className="font-serif text-[8.5vw] md:text-[5.5vw] xl:text-8xl text-black/80 tracking-tighter group-hover:translate-x-8 transition-transform duration-700 italic font-light whitespace-nowrap">
                     {item.label}
                   </h2>
                 </div>
@@ -149,7 +149,7 @@ export const MenuOverlay: React.FC<MenuOverlayProps> = ({
             ))}
           </div>
           
-          <div className="grid grid-cols-2 gap-12 pt-12">
+          <div className="grid grid-cols-1 xs:grid-cols-2 gap-6 md:gap-12 pt-12">
             <div>
               <p className="font-mono text-[9px] uppercase tracking-[0.4em] text-[#8B5E3C] mb-4">Contact</p>
               <p className="font-sans text-[11px] text-black/40 tracking-widest leading-loose">
@@ -191,7 +191,7 @@ export const MenuOverlay: React.FC<MenuOverlayProps> = ({
 
         <button 
           onClick={onClose}
-          className="absolute top-8 right-8 md:top-10 md:right-10 text-black/60 hover:text-black md:text-white/60 md:hover:text-white transition-colors p-4 cursor-none z-50"
+          className="absolute top-6 right-6 md:top-10 md:right-10 text-black/60 hover:text-black md:text-white/60 md:hover:text-white transition-colors p-4 cursor-none z-50"
         >
           <X size={28} />
         </button>

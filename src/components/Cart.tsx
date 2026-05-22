@@ -39,7 +39,7 @@ export const Cart: React.FC<CartProps> = ({ isOpen, onClose, items, onUpdateQuan
             className="fixed top-0 right-0 bottom-0 w-full md:w-[480px] bg-white z-[2501] shadow-2xl flex flex-col"
           >
             {/* Header */}
-            <div className="flex items-center justify-between p-8 border-b border-black/5">
+            <div className="flex items-center justify-between p-6 md:p-8 border-b border-black/5">
               <div className="flex items-center gap-4">
                 <h2 className="font-serif text-3xl text-black tracking-tight italic">Your Collection.</h2>
                 <span className="w-6 h-6 rounded-full bg-black text-white flex items-center justify-center font-mono text-[9px]">
@@ -52,7 +52,7 @@ export const Cart: React.FC<CartProps> = ({ isOpen, onClose, items, onUpdateQuan
             </div>
 
             {/* Cart Items */}
-            <div className="flex-1 overflow-y-auto p-8">
+            <div className="flex-1 overflow-y-auto p-6 md:p-8">
               {items.length === 0 ? (
                 <div className="h-full flex flex-col items-center justify-center text-center space-y-6">
                   <div className="w-16 h-16 border border-black/10 flex items-center justify-center rounded-full text-black/20">
@@ -74,7 +74,7 @@ export const Cart: React.FC<CartProps> = ({ isOpen, onClose, items, onUpdateQuan
                     const price = Number(item.variant?.price || item.product?.price || 0);
                     return (
                       <div key={index} className="flex gap-6 border-b border-black/5 pb-8 last:border-0 last:pb-0">
-                        <div className="w-24 h-24 bg-stone-100 flex-shrink-0 border border-black/5">
+                        <div className="w-20 h-20 md:w-24 md:h-24 bg-stone-100 flex-shrink-0 border border-black/5">
                           <img src={item.product.image || item.product.img} alt={item.product.title} className="w-full h-full object-cover" />
                         </div>
                         <div className="flex-1 flex flex-col justify-between">
@@ -111,7 +111,7 @@ export const Cart: React.FC<CartProps> = ({ isOpen, onClose, items, onUpdateQuan
 
             {/* Footer */}
             {items.length > 0 && (
-              <div className="p-8 border-t border-black/5 bg-[#F9F8F6]">
+              <div className="p-6 md:p-8 border-t border-black/5 bg-[#F9F8F6]">
                 <div className="flex justify-between items-center mb-6">
                   <span className="font-mono text-[10px] uppercase tracking-widest text-black/60">Subtotal</span>
                   <span className="font-serif text-3xl text-black">${subtotal.toFixed(2)}</span>

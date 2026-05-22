@@ -47,14 +47,14 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[3000] flex items-center justify-center p-4 md:p-8 bg-black/90 backdrop-blur-md overflow-y-auto"
+          className="fixed inset-0 z-[3000] flex items-start md:items-center justify-center p-0 md:p-8 bg-black/90 backdrop-blur-md overflow-y-auto md:overflow-hidden -webkit-overflow-scrolling-touch"
         >
           <motion.div 
             initial={{ scale: 0.9, y: 20 }}
             animate={{ scale: 1, y: 0 }}
-            className="bg-white w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 shadow-2xl relative my-8"
+            className="bg-white w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 shadow-2xl relative my-0 md:my-8 min-h-screen md:min-h-0"
           >
-            <button onClick={onClose} className="absolute top-8 right-8 text-black/20 hover:text-black z-20 transition-colors cursor-none">
+            <button onClick={onClose} className="absolute top-4 right-4 md:top-8 md:right-8 text-black/20 hover:text-black z-20 transition-colors cursor-none bg-white/80 md:bg-transparent rounded-full p-2">
               <X size={24} />
             </button>
 
@@ -62,7 +62,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
             <OrderSummary cartItems={cartItems} />
 
             {/* Right Column: Checkout Form Wrapper */}
-            <div className="p-8 md:p-16 flex flex-col justify-center max-h-[80vh] overflow-y-auto">
+            <div className="p-6 md:p-16 flex flex-col justify-center overflow-visible md:max-h-[80vh] md:overflow-y-auto">
               {checkoutStep === 'form' ? (
                 clientSecret ? (
                   stripePromise ? (
@@ -130,10 +130,10 @@ const OrderSummary = ({ cartItems }: { cartItems: any[] }) => {
   const total = cartItems.reduce((sum, item) => sum + (Number(item.variant?.price || item.product?.price || 0) * item.quantity), 0);
   
   return (
-    <div className="bg-[#F9F8F6] p-8 md:p-16 border-r border-black/5 flex flex-col justify-between hidden md:flex">
+    <div className="bg-[#F9F8F6] p-6 md:p-16 border-b md:border-b-0 md:border-r border-black/5 flex flex-col justify-between">
       <div>
         <span className="font-mono text-[9px] uppercase tracking-[0.4em] text-[#C5A059] mb-8 block">Order Summary</span>
-        <div className="space-y-6 mb-8 max-h-[40vh] overflow-y-auto pr-4">
+        <div className="space-y-6 mb-8 max-h-[30vh] md:max-h-[40vh] overflow-y-auto pr-4 -webkit-overflow-scrolling-touch">
           {cartItems.map((cartItem, idx) => (
             <div key={idx} className="flex gap-4 border-b border-black/5 pb-4 last:border-0">
               <div className="w-16 h-16 bg-white border border-black/5 flex-shrink-0">

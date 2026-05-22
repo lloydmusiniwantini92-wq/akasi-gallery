@@ -48,12 +48,12 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ product, onClose, 
           animate={{ scale: 1, y: 0 }}
           className="bg-[#F9F8F6] w-full max-w-5xl flex flex-col md:flex-row shadow-2xl relative my-8"
         >
-          <button onClick={onClose} className="absolute top-6 right-6 text-black/40 hover:text-black z-20 transition-colors cursor-none">
+          <button onClick={onClose} className="absolute top-4 right-4 md:top-6 md:right-6 text-black/40 hover:text-black z-20 transition-colors cursor-none bg-white/80 md:bg-transparent p-2 rounded-full md:rounded-none md:p-0">
             <X size={24} />
           </button>
 
           {/* Left Column: Image */}
-          <div className="w-full md:w-1/2 p-8 border-b md:border-b-0 md:border-r border-black/5 bg-white flex flex-col justify-center">
+          <div className="w-full md:w-1/2 p-6 md:p-8 border-b md:border-b-0 md:border-r border-black/5 bg-white flex flex-col justify-center">
             <div className="aspect-square bg-stone-100 overflow-hidden relative shadow-xl">
               <img src={product.image || product.img} alt={product.title} className="w-full h-full object-cover" />
             </div>
@@ -66,7 +66,7 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ product, onClose, 
           </div>
 
           {/* Right Column: Details & Actions */}
-          <div className="w-full md:w-1/2 p-8 md:p-12 lg:p-16 flex flex-col justify-between bg-[#F9F8F6]">
+          <div className="w-full md:w-1/2 p-6 md:p-12 lg:p-16 flex flex-col justify-between bg-[#F9F8F6]">
             <div>
               <span className="font-mono text-[9px] uppercase tracking-[0.4em] text-[#C5A059] mb-4 block">Product Details</span>
               <h1 className="font-serif text-4xl md:text-5xl text-black tracking-tighter italic leading-none mb-8">Acquisition.</h1>

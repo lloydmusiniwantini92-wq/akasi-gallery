@@ -64,7 +64,7 @@ export const AboutView: React.FC<AboutViewProps> = ({ navigateTo }) => {
         {/* BACKGROUND TYPOGRAPHIC WATERMARK (CONSTRAINED TO LEFT HALF) */}
         <div className="absolute inset-0 md:w-1/2 overflow-hidden pointer-events-none z-0 flex items-center justify-center pt-[10vh]">
            <motion.div style={{ y: quoteY }} className="w-full">
-             <h2 className="font-serif text-[12vw] md:text-[6.5vw] text-black/[0.04] leading-[0.85] tracking-tighter italic font-light text-center w-full px-8 break-words mix-blend-multiply">
+             <h2 className="font-serif text-[8vw] md:text-[6.5vw] text-black/[0.03] md:text-black/[0.04] leading-[0.85] tracking-tighter italic font-light text-center w-full px-8 break-words mix-blend-multiply">
                "If there is nowhere to fit in, there is always somewhere to stand out."
              </h2>
            </motion.div>
