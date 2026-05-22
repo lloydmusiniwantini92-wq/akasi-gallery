@@ -4,7 +4,7 @@ import { EditorialReveal } from './EditorialReveal';
 import { ArrowRight } from 'lucide-react';
 
 export const Exhibitions: React.FC = () => (
-  <section className="bg-[#F9F8F6] text-black py-24 md:py-32 px-8 md:px-24 border-t border-black/5">
+  <section className="bg-[#D9D2C5] text-black py-24 md:py-32 px-8 md:px-24 border-t border-black/5">
     <div className="max-w-7xl mx-auto">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-12 mb-20">
         <div className="space-y-4">
@@ -25,7 +25,7 @@ export const Exhibitions: React.FC = () => (
       <div className="flex flex-col border-t border-black/5">
         {EXHIBITIONS.map((event, i) => (
           <EditorialReveal key={i} delay={0.2 + (i * 0.1)}>
-            <div className="group flex flex-col md:flex-row items-start md:items-center justify-between py-8 md:py-12 border-b border-black/5 hover:bg-[#D9D2C5]/30 transition-colors duration-500 px-4 md:px-8 cursor-none">
+            <div className="group flex flex-col md:flex-row items-start md:items-center justify-between py-8 md:py-12 border-b border-black/5 hover:bg-white/30 transition-colors duration-500 px-4 md:px-8 cursor-none">
               <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-16 w-full md:w-auto mb-6 md:mb-0">
                 <p className="font-mono text-sm md:text-base tracking-[0.2em] text-[#C5A059] font-bold w-24">
                   {event.date}
