@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { AnimatePresence } from 'motion/react';
 import { IMAGES, HERO_SLIDES, ABOUT_IMAGES } from './constants/assets';
 import { CustomCursor, Splashscreen } from './components/CoreUI';
@@ -16,15 +16,6 @@ const NAV_ITEMS = [
   { label: "Viewing Room", view: 'shop', section: 'shop', img: IMAGES.masterpiece2 },
   { label: "Narrative", view: 'about', section: 'about', img: ABOUT_IMAGES.hero },
   { label: "Exhibitions", view: 'home', section: 'exhibitions', img: IMAGES.studio2 },
-];
-
-const FALLBACK_PRODUCTS = [
-  { id: "PR-1001", title: "The Vision", price: 12500, image: IMAGES.hero },
-  { id: "PR-1002", title: "Resilience II", price: 8200, image: IMAGES.masterpiece1 },
-  { id: "PR-1003", title: "Ancestral Echo", price: 9800, image: IMAGES.masterpiece2 },
-  { id: "PR-1004", title: "Velvet Void I", price: 4500, image: IMAGES.masterpiece3 },
-  { id: "PR-1005", title: "Studio Study", price: 2100, image: IMAGES.studio1 },
-  { id: "PR-1006", title: "Linen Form", price: 3400, image: IMAGES.studio2 },
 ];
 
 export default function App() {
@@ -60,30 +51,49 @@ export default function App() {
   const [products, setProducts] = useState<any[]>([]);
   const [repoStatus, setRepoStatus] = useState('Standalone');
 
+  const scrollPositions = useRef<Record<string, number>>({});
+  const pendingScroll = useRef<{ sectionId?: string; y?: number } | null>(null);
+
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+  }, []);
+
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 2200);
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+      scrollPositions.current[view] = window.scrollY;
+    };
     const handleMouseMove = (e: MouseEvent) => setCursorPos({ x: e.clientX, y: e.clientY });
 
     const handlePopState = () => {
       const hash = window.location.hash.replace('#', '') || 'home';
       const [newView, sectionId] = hash.split('/');
+      const validatedView = validViews.includes(newView) ? newView : 'home';
       
-      setView(validViews.includes(newView) ? newView : 'home');
       setIsMenuOpen(false);
-      
-      // Fix: Ensure all modal and overlay states are cleared when the user clicks the browser back button
       setSelectedProduct(null);
       setIsCartOpen(false);
       setIsCheckoutOpen(false);
       
-      if (sectionId) {
-        setTimeout(() => {
-          const el = document.getElementById(sectionId);
-          if (el) el.scrollIntoView({ behavior: 'auto' });
-        }, 100);
+      if (view === validatedView) {
+        if (sectionId) {
+          setTimeout(() => {
+            const el = document.getElementById(sectionId);
+            if (el) el.scrollIntoView({ behavior: 'auto' });
+          }, 50);
+        } else {
+          const y = scrollPositions.current[validatedView] || 0;
+          window.scrollTo({ top: y, behavior: 'auto' });
+        }
       } else {
-        window.scrollTo({ top: 0, behavior: 'auto' });
+        pendingScroll.current = { 
+          sectionId, 
+          y: sectionId ? undefined : (scrollPositions.current[validatedView] || 0) 
+        };
+        setView(validatedView);
       }
     };
 
@@ -131,7 +141,7 @@ export default function App() {
       window.removeEventListener('popstate', handlePopState);
       clearInterval(interval);
     };
-  }, []);
+  }, [view]);
 
   const handleOrderSubmit = async (orderPayload: any) => {
     setCheckoutStep('processing');
@@ -175,16 +185,23 @@ export default function App() {
       window.history.pushState({ view: newView, sectionId }, '', hash);
     }
     
-    setView(newView);
     setIsMenuOpen(false);
-    
-    if (sectionId) {
-      setTimeout(() => {
-        const el = document.getElementById(sectionId);
-        if (el) el.scrollIntoView({ behavior: 'auto' });
-      }, 100);
+
+    if (view === newView) {
+      if (sectionId) {
+        setTimeout(() => {
+          const el = document.getElementById(sectionId);
+          if (el) el.scrollIntoView({ behavior: 'auto' });
+        }, 50);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'auto' });
+      }
     } else {
-      window.scrollTo({ top: 0, behavior: 'auto' });
+      pendingScroll.current = { 
+        sectionId, 
+        y: sectionId ? undefined : 0 
+      };
+      setView(newView);
     }
   };
 
@@ -242,7 +259,21 @@ export default function App() {
         NAV_ITEMS={NAV_ITEMS} 
       />
 
-      <AnimatePresence mode="wait">
+      <AnimatePresence 
+        mode="wait"
+        onExitComplete={() => {
+          if (pendingScroll.current) {
+            const { sectionId, y } = pendingScroll.current;
+            if (sectionId) {
+              const el = document.getElementById(sectionId);
+              if (el) el.scrollIntoView({ behavior: 'auto' });
+            } else if (y !== undefined) {
+              window.scrollTo({ top: y, behavior: 'auto' });
+            }
+            pendingScroll.current = null;
+          }
+        }}
+      >
         {view === 'home' ? (
           <HomeView 
             key="home"
