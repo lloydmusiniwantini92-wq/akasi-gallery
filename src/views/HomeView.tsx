@@ -186,7 +186,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
     </motion.section>
 
     {/* SECTION 3: MASTERPIECES */}
-    <section id="masterpieces" className="bg-[#F9F8F6] py-16 md:py-32 px-8 md:px-24">
+    <section id="masterpieces" className="bg-[#D9D2C5] py-16 md:py-32 px-8 md:px-24 border-t border-black/5">
       <div className="max-w-7xl mx-auto">
         <div className="mb-16 md:mb-24 flex flex-col items-center text-center gap-6">
           <div className="space-y-4">
