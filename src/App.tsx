@@ -288,28 +288,33 @@ export default function App() {
           }
         }}
       >
-        {view === 'home' ? (
-          <HomeView 
-            key="home"
-            heroIndex={heroIndex}
-            hoveredId={hoveredId}
-            setHoveredId={setHoveredId}
-            openCheckout={(item) => setSelectedProduct(item)}
-            navigateTo={navigateTo}
-          />
-        ) : view === 'shop' ? (
-          <ShopView 
-            key="shop"
-            products={products}
-            repoStatus={repoStatus}
-            onSelectProduct={(product) => setSelectedProduct(product)}
-          />
-        ) : (
-          <AboutView 
-            key="about"
-            navigateTo={navigateTo}
-          />
-        )}
+        <motion.div
+          key={view}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        >
+          {view === 'home' ? (
+            <HomeView 
+              heroIndex={heroIndex}
+              hoveredId={hoveredId}
+              setHoveredId={setHoveredId}
+              openCheckout={(item) => setSelectedProduct(item)}
+              navigateTo={navigateTo}
+            />
+          ) : view === 'shop' ? (
+            <ShopView 
+              products={products}
+              repoStatus={repoStatus}
+              onSelectProduct={(product) => setSelectedProduct(product)}
+            />
+          ) : (
+            <AboutView 
+              navigateTo={navigateTo}
+            />
+          )}
+        </motion.div>
       </AnimatePresence>
 
       <Footer navigateTo={navigateTo} />
