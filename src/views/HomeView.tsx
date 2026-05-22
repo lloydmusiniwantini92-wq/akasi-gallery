@@ -215,14 +215,17 @@ export const HomeView: React.FC<HomeViewProps> = ({
            </div>
         </EditorialReveal>
 
-        <div className="flex overflow-x-auto snap-x snap-mandatory gap-8 pb-12 scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+          className="flex overflow-x-auto snap-x snap-mandatory gap-8 pb-12 scrollbar-hide" 
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
           {MASTERPIECES.map((art, i) => (
-            <motion.div 
+            <div 
               key={i} 
-              initial={{ opacity: 0, y: 100, scale: 0.95 }} 
-              whileInView={{ opacity: 1, y: 0, scale: 1 }} 
-              viewport={{ once: true, margin: "-15%" }} 
-              transition={{ duration: 1.5, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }} 
               onPointerEnter={(e) => { if (e.pointerType === 'mouse') setHoveredId(i); }}
               onPointerLeave={(e) => { if (e.pointerType === 'mouse') setHoveredId(null); }}
               className="group relative cursor-none flex-none w-[85vw] md:w-[450px] snap-center"
@@ -244,9 +247,9 @@ export const HomeView: React.FC<HomeViewProps> = ({
                   <p className="font-mono text-[10px] uppercase tracking-widest text-black/30">{art.year}</p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </div>
+        </motion.div>
 
         <div className="mt-8 md:mt-16 flex justify-center">
           <button 
@@ -294,16 +297,19 @@ export const HomeView: React.FC<HomeViewProps> = ({
           </EditorialReveal>
              
           {/* Desktop: Elastic Carousel | Mobile: Horizontal Swipe Carousel */}
-          <div className="flex overflow-x-auto snap-x snap-mandatory md:overflow-hidden md:flex-row h-[400px] md:h-[650px] gap-4 mb-16 md:mb-24 scrollbar-hide pb-8 md:pb-0" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+            className="flex overflow-x-auto snap-x snap-mandatory md:overflow-hidden md:flex-row h-[400px] md:h-[650px] gap-4 mb-16 md:mb-24 scrollbar-hide pb-8 md:pb-0" 
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
              {[...COLLECTIONS.map(c => c.img), ...EXPERIMENTAL_GALLERY, IMAGES.studio3].map((img, i) => {
                const isActive = activeAccordion === i;
                return (
-                 <motion.div 
+                 <div 
                    key={i}
-                   initial={{ opacity: 0, y: 100, scale: 0.95 }}
-                   whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                   viewport={{ once: true, margin: "-15%" }}
-                   transition={{ duration: 1.5, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
                    onPointerEnter={(e) => { if (e.pointerType === 'mouse') setActiveAccordion(i); }}
                    className={`relative group overflow-hidden border border-black/5 shadow-xl md:shadow-2xl bg-[#0a0a0a] transition-all duration-700 ease-[0.16,1,0.3,1] ${
                      isActive ? 'md:flex-[6]' : 'md:flex-[1]'
@@ -332,10 +338,10 @@ export const HomeView: React.FC<HomeViewProps> = ({
                          )}
                       </AnimatePresence>
                    </div>
-                 </motion.div>
+                 </div>
                );
              })}
-          </div>
+          </motion.div>
        </div>
     </section>
 
