@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Check, Mail, Globe, ArrowRight, Instagram, Linkedin, Twitter } from 'lucide-react';
+import { Check, Mail, Globe, ArrowRight, ArrowLeft, Instagram, Linkedin, Twitter } from 'lucide-react';
 import { IMAGES, HERO_SLIDES, ABOUT_IMAGES, EXPERIMENTAL_GALLERY } from '../constants/assets';
 import { MASTERPIECES, COLLECTIONS, EXHIBITIONS, HERO_SEQUENCE } from '../data/galleryData';
 import { PrivateViewOverlay } from '../components/PrivateViewOverlay';
@@ -206,9 +206,11 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
         {/* Mobile Swipe Indicator */}
         <EditorialReveal delay={0.4}>
-           <div className="md:hidden flex items-center justify-end mb-6 w-full">
-              <span className="font-mono text-[9px] uppercase tracking-widest text-[#C5A059] flex items-center gap-2">
-                Swipe to explore <ArrowRight size={12} className="animate-pulse" />
+           <div className="md:hidden flex items-center justify-center mb-6 w-full">
+              <span className="font-mono text-[9px] uppercase tracking-widest text-[#C5A059] flex items-center gap-4">
+                <ArrowLeft size={12} className="animate-pulse" />
+                Swipe to explore
+                <ArrowRight size={12} className="animate-pulse" />
               </span>
            </div>
         </EditorialReveal>
@@ -226,7 +228,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
               className="group relative cursor-none flex-none w-[85vw] md:w-[450px] snap-center"
             >
               <div className="relative aspect-[4/5] overflow-hidden bg-stone-200 shadow-xl border border-black/5">
-                <img src={art.img} className="w-full h-full object-cover transition-transform duration-[4s] ease-out group-hover:scale-110" alt={art.title} />
+                <img src={art.img} className="w-full h-full object-cover transition-transform duration-[4s] ease-out md:group-hover:scale-110" alt={art.title} />
                 <div className="absolute inset-0 bg-black/0 md:group-hover:bg-black/40 transition-all duration-700 flex items-center justify-center">
                    <button 
                       onClick={() => navigateTo('shop')}
@@ -282,9 +284,11 @@ export const HomeView: React.FC<HomeViewProps> = ({
              
           {/* Mobile Swipe Indicator */}
           <EditorialReveal delay={0.4}>
-             <div className="md:hidden flex items-center justify-end mb-6 w-full">
-                <span className="font-mono text-[9px] uppercase tracking-widest text-[#8B5E3C] flex items-center gap-2">
-                  Swipe to explore <ArrowRight size={12} className="animate-pulse" />
+             <div className="md:hidden flex items-center justify-center mb-6 w-full">
+                <span className="font-mono text-[9px] uppercase tracking-widest text-[#8B5E3C] flex items-center gap-4">
+                  <ArrowLeft size={12} className="animate-pulse" />
+                  Swipe to explore
+                  <ArrowRight size={12} className="animate-pulse" />
                 </span>
              </div>
           </EditorialReveal>
@@ -305,7 +309,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                      isActive ? 'md:flex-[6]' : 'md:flex-[1]'
                    } aspect-[4/5] md:aspect-auto flex-none w-[85vw] md:w-auto snap-center cursor-none`}
                  >
-                   <img src={img} className={`w-full h-full object-cover transition-all duration-1000 ease-out group-hover:scale-105 ${!isActive && 'md:opacity-60 md:grayscale'}`} alt="Series Flow" />
+                   <img src={img} className={`w-full h-full object-cover transition-all duration-1000 ease-out md:group-hover:scale-105 ${!isActive && 'md:opacity-60 md:grayscale'}`} alt="Series Flow" />
                    
                    <div className={`absolute inset-0 transition-all duration-700 flex flex-col justify-end p-8 ${isActive ? 'bg-gradient-to-t from-black/90 via-black/20 to-transparent' : 'bg-black/40'}`}>
                       <AnimatePresence>
