@@ -126,7 +126,7 @@ export const MenuOverlay: React.FC<MenuOverlayProps> = ({
         className="fixed inset-0 z-[2000] bg-black flex"
       >
         <div className="w-full md:w-1/2 h-full p-6 md:p-12 lg:p-16 xl:p-24 flex flex-col justify-between border-r border-black/5 bg-[#D9D2C5] overflow-y-auto">
-          <div className="space-y-2">
+          <div className="flex-1 flex flex-col justify-center space-y-8 md:space-y-2 mt-16 md:mt-0">
             {NAV_ITEMS.map((item, i) => (
               <motion.div
                 key={item.label}
@@ -136,20 +136,20 @@ export const MenuOverlay: React.FC<MenuOverlayProps> = ({
                 onMouseEnter={() => setHoveredNav(i)}
                 onMouseLeave={() => setHoveredNav(null)}
                 onClick={() => { navigateTo(item.view, item.section); onClose(); }}
-                className="group cursor-none py-4 border-b border-black/5 flex items-end justify-between overflow-visible"
+                className="group cursor-none py-2 md:py-4 border-b-0 md:border-b md:border-black/5 flex items-center md:items-end justify-center md:justify-between overflow-visible"
               >
-                <div className="relative">
-                  <span className="font-mono text-[10px] text-[#8B5E3C] absolute -top-4 left-0 opacity-0 group-hover:opacity-100 transition-opacity">0{i+1}</span>
-                  <h2 className="font-serif text-[8.5vw] md:text-[5.5vw] xl:text-8xl text-black/80 tracking-tighter group-hover:translate-x-8 transition-transform duration-700 italic font-light whitespace-nowrap">
+                <div className="relative flex flex-col items-center md:items-start text-center md:text-left">
+                  <span className="font-mono text-[10px] text-[#8B5E3C] mb-2 md:mb-0 md:absolute md:-top-4 md:left-0 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">0{i+1}</span>
+                  <h2 className="font-serif text-5xl md:text-[5.5vw] xl:text-8xl text-black/80 tracking-tighter md:group-hover:translate-x-8 transition-transform duration-700 italic font-light whitespace-nowrap">
                     {item.label}
                   </h2>
                 </div>
-                <ArrowRight size={32} className="text-[#8B5E3C] opacity-0 group-hover:opacity-100 group-hover:-rotate-45 transition-all duration-500 shrink-0 ml-4" />
+                <ArrowRight size={32} className="hidden md:block text-[#8B5E3C] opacity-0 group-hover:opacity-100 group-hover:-rotate-45 transition-all duration-500 shrink-0 ml-4" />
               </motion.div>
             ))}
           </div>
           
-          <div className="grid grid-cols-1 xs:grid-cols-2 gap-6 md:gap-12 pt-12">
+          <div className="flex flex-col md:grid md:grid-cols-2 gap-8 md:gap-12 pt-12 border-t border-black/5 md:border-transparent mt-12 md:mt-0 pb-8 md:pb-0 items-center md:items-start text-center md:text-left">
             <div>
               <p className="font-mono text-[9px] uppercase tracking-[0.4em] text-[#8B5E3C] mb-4">Contact</p>
               <p className="font-sans text-[11px] text-black/40 tracking-widest leading-loose">
@@ -157,7 +157,7 @@ export const MenuOverlay: React.FC<MenuOverlayProps> = ({
                 +1 (269) 555-0192
               </p>
             </div>
-            <div className="flex gap-6 items-end justify-end">
+            <div className="flex gap-6 items-center md:items-end justify-center md:justify-end w-full">
               <Instagram size={18} className="text-black/20 hover:text-[#8B5E3C] transition-colors cursor-none" />
               <Linkedin size={18} className="text-black/20 hover:text-[#8B5E3C] transition-colors cursor-none" />
               <Twitter size={18} className="text-black/20 hover:text-[#8B5E3C] transition-colors cursor-none" />
@@ -191,9 +191,9 @@ export const MenuOverlay: React.FC<MenuOverlayProps> = ({
 
         <button 
           onClick={onClose}
-          className="absolute top-6 right-6 md:top-10 md:right-10 text-black/60 hover:text-black md:text-white/60 md:hover:text-white transition-colors p-4 cursor-none z-50"
+          className="absolute top-6 right-6 md:top-10 md:right-10 text-black/60 hover:text-black md:text-white/60 md:hover:text-white transition-colors p-4 cursor-none z-50 bg-black/5 md:bg-transparent rounded-full md:rounded-none border border-black/10 md:border-transparent"
         >
-          <X size={28} />
+          <X size={24} className="md:w-7 md:h-7" />
         </button>
       </motion.div>
     )}

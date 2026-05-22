@@ -28,11 +28,11 @@ export const AboutView: React.FC<AboutViewProps> = ({ navigateTo }) => {
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="bg-[#FAFAFA] min-h-screen text-[#1A1A1A] selection:bg-[#C5A059] selection:text-white"
+      className="bg-[#D9D2C5] min-h-screen text-[#1A1A1A] selection:bg-[#C5A059] selection:text-white"
     >
       {/* ABOUT HERO */}
       <div className="relative h-screen w-full overflow-hidden flex flex-col justify-end group cursor-none">
-        <div className="absolute inset-0 z-0 bg-[#FAFAFA]">
+        <div className="absolute inset-0 z-0 bg-[#D9D2C5]">
           <img src={ABOUT_IMAGES.hero} className="w-full h-full object-cover object-[50%_30%] brightness-[0.85] group-hover:brightness-100 transition-all duration-[2s] ease-out" alt="Akasi Osei" />
           <div className="absolute inset-0 bg-black/5 z-10 pointer-events-none" />
         </div>
@@ -71,8 +71,8 @@ export const AboutView: React.FC<AboutViewProps> = ({ navigateTo }) => {
         </div>
 
         {/* LEFT SCROLLING TEXT */}
-        <div className="w-full md:w-1/2 relative z-10 flex flex-col py-32 md:py-[20vh] px-8 md:px-16 lg:px-24">
-           <div className="max-w-xl mx-auto flex flex-col gap-[20vh]">
+        <div className="w-full md:w-1/2 relative z-10 flex flex-col py-24 md:py-[20vh] px-8 md:px-16 lg:px-24">
+           <div className="max-w-xl mx-auto flex flex-col gap-16 md:gap-[20vh]">
              
              {/* Block 1 */}
              <motion.div 
@@ -145,8 +145,8 @@ export const AboutView: React.FC<AboutViewProps> = ({ navigateTo }) => {
       </div>
 
       {/* ASYMMETRICAL ARCHIVAL STUDY (NOW USING CONCIERGE & SERIES IMAGES) */}
-      <div className="w-full bg-[#FAFAFA] py-32 md:py-48 px-8 md:px-16 border-t border-black/5">
-        <div className="max-w-7xl mx-auto flex flex-col gap-24">
+      <div className="w-full bg-[#D9D2C5] py-16 md:py-48 px-8 md:px-16 border-t border-black/5">
+        <div className="max-w-7xl mx-auto flex flex-col gap-16 md:gap-24">
           
           <div className="flex flex-col md:flex-row justify-between items-end">
              <div>
@@ -193,7 +193,7 @@ export const AboutView: React.FC<AboutViewProps> = ({ navigateTo }) => {
       </div>
 
       {/* CTA SECTION - ELEVATED MINIMALISM */}
-      <div className="relative bg-[#FAFAFA] py-32 md:py-56 px-8 md:px-24 text-center flex flex-col items-center justify-center min-h-[70vh] group cursor-none overflow-hidden border-t border-black/10">
+      <div className="relative bg-[#D9D2C5] py-24 md:py-56 px-8 md:px-24 text-center flex flex-col items-center justify-center min-h-[50vh] md:min-h-[70vh] group cursor-none overflow-hidden border-t border-black/10">
          <div className="absolute inset-0 bg-[#C5A059] transition-opacity duration-[2s] opacity-0 group-hover:opacity-10 z-0"></div>
          <motion.div 
            initial={{ opacity: 0, scale: 0.95 }}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Check, Mail, Globe, ArrowRight, Instagram, Linkedin, Twitter } from 'lucide-react';
 import { IMAGES, HERO_SLIDES, ABOUT_IMAGES, EXPERIMENTAL_GALLERY } from '../constants/assets';
@@ -15,7 +15,10 @@ interface HomeViewProps {
 
 export const HomeView: React.FC<HomeViewProps> = ({ 
   heroIndex, hoveredId, setHoveredId, openCheckout, navigateTo 
-}) => (
+}) => {
+  const [activeAccordion, setActiveAccordion] = useState<number>(1);
+  const [activeCarouselIndex, setActiveCarouselIndex] = useState<number>(2);
+  return (
   <>
     {/* SECTION 1: HERO */}
     <section id="home" className="h-screen relative overflow-hidden bg-black">
@@ -171,9 +174,9 @@ export const HomeView: React.FC<HomeViewProps> = ({
     </motion.section>
 
     {/* SECTION 3: MASTERPIECES */}
-    <section id="masterpieces" className="bg-[#F9F8F6] py-32 px-8 md:px-24">
+    <section id="masterpieces" className="bg-[#F9F8F6] py-16 md:py-32 px-8 md:px-24">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-24 flex flex-col md:flex-row justify-between items-end gap-12">
+        <div className="mb-16 md:mb-24 flex flex-col md:flex-row justify-between items-end gap-8 md:gap-12">
           <div className="space-y-4">
             <span className="font-mono text-[10px] uppercase tracking-[0.8em] text-[#C5A059]">Selected Works</span>
             <h2 className="font-serif text-6xl md:text-8xl tracking-tighter text-black leading-none uppercase font-light">The Shop.</h2>
@@ -183,7 +186,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-24">
           {MASTERPIECES.map((art, i) => (
             <motion.div 
               key={i} 
@@ -230,12 +233,12 @@ export const HomeView: React.FC<HomeViewProps> = ({
     </section>
 
     {/* SECTION 4: COLLECTIONS */}
-    <section id="collections" className="bg-[#D9D2C5] text-black py-32 overflow-hidden relative border-y border-black/5">
+    <section id="collections" className="bg-[#D9D2C5] text-black py-16 md:py-32 overflow-hidden relative border-y border-black/5">
        <div className="absolute inset-0 opacity-5">
           <img src={IMAGES.masterpiece3} className="w-full h-full object-cover" alt="Background" />
        </div>
        <div className="max-w-7xl mx-auto px-8 md:px-24 relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-24 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-24 items-center">
              <div className="md:col-span-4 space-y-12">
                 <span className="font-mono text-[10px] uppercase tracking-[0.8em] text-[#8B5E3C]">Curated Sets</span>
                 <h2 className="font-serif text-6xl md:text-8xl tracking-tighter italic leading-none text-black">The Series.</h2>
@@ -278,9 +281,9 @@ export const HomeView: React.FC<HomeViewProps> = ({
     </section>
 
     {/* SECTION 5: EXHIBITIONS */}
-    <section id="exhibitions" className="bg-[#D9D2C5] py-32 px-8 md:px-24">
+    <section id="exhibitions" className="bg-[#D9D2C5] py-16 md:py-32 px-8 md:px-24">
        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-24 space-y-8">
+          <div className="text-center mb-16 md:mb-24 space-y-6 md:space-y-8">
              <span className="font-mono text-[10px] uppercase tracking-[1em] text-[#8B5E3C]">Presence</span>
              <h2 className="font-serif text-6xl text-black tracking-tighter italic">Global Schedule.</h2>
           </div>
@@ -312,9 +315,9 @@ export const HomeView: React.FC<HomeViewProps> = ({
     </section>
 
     {/* SECTION 6: THE PRIVATE VIEW */}
-    <section id="private" className="bg-[#F9F8F6] py-32 px-8 md:px-24 overflow-hidden border-t border-black/5">
+    <section id="private" className="bg-[#F9F8F6] py-16 md:py-32 px-8 md:px-24 overflow-hidden border-t border-black/5">
        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-12">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 md:mb-24 gap-8 md:gap-12">
              <div className="space-y-4">
                 <span className="font-mono text-[10px] uppercase tracking-[0.8em] text-[#C5A059]">The Concierge</span>
                 <h2 className="font-serif text-6xl md:text-8xl tracking-tighter text-black leading-none italic font-light">Exclusive <br/> Access.</h2>
@@ -324,28 +327,51 @@ export const HomeView: React.FC<HomeViewProps> = ({
              </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
-             {EXPERIMENTAL_GALLERY.slice(0, 3).map((img, i) => (
-               <motion.div 
-                 key={i}
-                 initial={{ opacity: 0, y: 80 }}
-                 whileInView={{ opacity: 1, y: 0 }}
-                 viewport={{ once: true }}
-                 transition={{ duration: 1.2, delay: i * 0.2, ease: [0.16, 1, 0.3, 1] }}
-                 className="relative group aspect-[3/4] overflow-hidden border border-black/5 shadow-2xl bg-white"
-               >
-                 <img src={img} className="w-full h-full object-contain p-4 transition-all duration-1000" alt="Private Archive" />
-                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-700 flex items-center justify-center">
-                    <div className="opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-700 text-center">
-                       <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-white/60 mb-2">Private Study 00{i+1}</p>
-                       <p className="font-serif text-3xl text-white italic tracking-tighter">$4,200</p>
-                    </div>
-                 </div>
-               </motion.div>
-             ))}
+          {/* Desktop: Elastic Carousel | Mobile: Stacked */}
+          <div className="flex flex-col md:flex-row h-auto md:h-[650px] gap-4 mb-16 md:mb-24 overflow-hidden">
+             {EXPERIMENTAL_GALLERY.slice(0, 3).map((img, i) => {
+               const isActive = activeAccordion === i;
+               return (
+                 <motion.div 
+                   key={i}
+                   initial={{ opacity: 0, y: 80 }}
+                   whileInView={{ opacity: 1, y: 0 }}
+                   viewport={{ once: true }}
+                   transition={{ duration: 1.2, delay: i * 0.2, ease: [0.16, 1, 0.3, 1] }}
+                   onMouseEnter={() => setActiveAccordion(i)}
+                   className={`relative group overflow-hidden border border-black/5 shadow-2xl bg-[#0a0a0a] transition-all duration-700 ease-[0.16,1,0.3,1] ${
+                     isActive ? 'md:flex-[6]' : 'md:flex-[1]'
+                   } aspect-[4/5] md:aspect-auto w-full cursor-none`}
+                 >
+                   <img src={img} className={`w-full h-full object-cover transition-all duration-1000 ease-out group-hover:scale-105 ${!isActive && 'opacity-60 grayscale'}`} alt="Private Archive" />
+                   
+                   <div className={`absolute inset-0 transition-all duration-700 flex flex-col justify-end p-8 ${isActive ? 'bg-gradient-to-t from-black/90 via-black/20 to-transparent' : 'bg-black/40'}`}>
+                      <AnimatePresence>
+                         {isActive && (
+                           <motion.div 
+                             initial={{ opacity: 0, y: 20 }}
+                             animate={{ opacity: 1, y: 0 }}
+                             exit={{ opacity: 0, y: 10 }}
+                             transition={{ duration: 0.5, delay: 0.2 }}
+                             className="w-full flex flex-col md:flex-row justify-between items-start md:items-end gap-6"
+                           >
+                             <div className="text-left w-full overflow-hidden">
+                               <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-[#C5A059] mb-2 drop-shadow-md">Private Study 00{i+1}</p>
+                               <p className="font-serif text-4xl md:text-5xl text-white italic tracking-tighter drop-shadow-lg whitespace-nowrap">Archive File</p>
+                             </div>
+                             <button className="shrink-0 px-6 py-4 border border-white/20 text-white font-sans text-[9px] uppercase tracking-widest hover:bg-white hover:text-black transition-colors cursor-none backdrop-blur-sm">
+                               Unlock
+                             </button>
+                           </motion.div>
+                         )}
+                      </AnimatePresence>
+                   </div>
+                 </motion.div>
+               );
+             })}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-24 items-center border-t border-black/5 pt-24">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center border-t border-black/5 pt-16 md:pt-24">
              <div className="space-y-12">
                 <p className="font-sans text-sm md:text-base text-black/60 leading-[2.5] max-w-lg">
                    Collectors within our circle gain access to private directives, archival sketches, and early acquisition opportunities before public entry.
@@ -367,15 +393,65 @@ export const HomeView: React.FC<HomeViewProps> = ({
        </div>
     </section>
 
-    {/* SECTION 7: EXPERIMENTAL FLOW */}
-    <section className="bg-[#D9D2C5] pt-32 pb-8 overflow-hidden border-t border-black/5">
-       <div className="flex gap-12 animate-scroll">
-          {[...EXPERIMENTAL_GALLERY, ...EXPERIMENTAL_GALLERY].map((img, i) => (
-            <div key={i} className="flex-none w-[300px] md:w-[500px] aspect-[4/5] overflow-hidden transition-all duration-[2s] border border-black/5 shadow-2xl">
-               <img src={img} className="w-full h-full object-cover" alt="Gallery Flow" />
-            </div>
-          ))}
-       </div>
+    {/* SECTION 7: EXPERIMENTAL FLOW (PARALLAX ON DESKTOP, SNAP ON MOBILE) */}
+    <section className="bg-[#D9D2C5] py-24 md:py-32 overflow-hidden border-t border-black/5 relative">
+      
+      {/* MOBILE: NATIVE SNAP SCROLL */}
+      <div className="md:hidden flex gap-4 overflow-x-auto snap-x snap-mandatory px-8 pb-12 scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+         {[...EXPERIMENTAL_GALLERY, ...EXPERIMENTAL_GALLERY].map((img, i) => (
+           <div key={i} className="flex-none w-[80vw] aspect-[4/5] snap-center overflow-hidden border border-black/5 shadow-xl">
+              <img src={img} className="w-full h-full object-cover" alt="Gallery Flow" />
+           </div>
+         ))}
+      </div>
+
+      {/* DESKTOP: PARALLAX COVERFLOW CAROUSEL */}
+      <div className="hidden md:flex relative h-[600px] items-center justify-center w-full">
+         <div className="relative w-full max-w-6xl h-full flex items-center justify-center">
+            {[...EXPERIMENTAL_GALLERY, ...EXPERIMENTAL_GALLERY].slice(0, 5).map((img, i) => {
+               // Calculate relative distance from center
+               const distance = i - activeCarouselIndex;
+               const clampedDistance = Math.max(-2, Math.min(2, distance));
+               const isActive = distance === 0;
+
+               return (
+                 <motion.div
+                   key={i}
+                   onClick={() => setActiveCarouselIndex(i)}
+                   className="absolute cursor-none origin-center"
+                   animate={{
+                     x: clampedDistance * 320,
+                     scale: isActive ? 1 : 0.8 - Math.abs(clampedDistance) * 0.05,
+                     zIndex: 10 - Math.abs(clampedDistance),
+                     opacity: isActive ? 1 : 0.4 - Math.abs(clampedDistance) * 0.15,
+                   }}
+                   transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                   style={{
+                     width: "400px",
+                     height: "500px",
+                     filter: isActive ? "blur(0px)" : `blur(${Math.abs(clampedDistance) * 2}px)`
+                   }}
+                 >
+                   <div className="w-full h-full overflow-hidden border border-black/5 shadow-2xl bg-black relative group">
+                      <img src={img} className="w-full h-full object-cover transition-transform duration-[3s] group-hover:scale-105" alt="Gallery Flow" />
+                      {!isActive && <div className="absolute inset-0 bg-black/20" />}
+                   </div>
+                 </motion.div>
+               );
+            })}
+         </div>
+         {/* Simple Navigation Hints */}
+         <div className="absolute bottom-8 flex gap-4">
+            {[...EXPERIMENTAL_GALLERY, ...EXPERIMENTAL_GALLERY].slice(0, 5).map((_, i) => (
+               <button 
+                  key={i}
+                  onClick={() => setActiveCarouselIndex(i)}
+                  className={`h-px transition-all duration-500 cursor-none ${activeCarouselIndex === i ? 'w-12 bg-black' : 'w-4 bg-black/20'}`}
+               />
+            ))}
+         </div>
+      </div>
     </section>
   </>
-);
+  );
+};
