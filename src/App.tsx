@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { IMAGES, HERO_SLIDES, ABOUT_IMAGES } from './constants/assets';
 import { CustomCursor, Splashscreen } from './components/CoreUI';
 import { Navbar, MenuOverlay } from './components/Navigation';
