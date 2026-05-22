@@ -254,80 +254,9 @@ export const HomeView: React.FC<HomeViewProps> = ({
              </p>
           </div>
              
-          <div className="flex overflow-x-auto md:grid md:grid-cols-3 snap-x snap-mandatory gap-8 md:gap-12 pb-8 scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-             {COLLECTIONS.map((col, i) => (
-               <motion.div 
-                 key={i} 
-                 initial={{ opacity: 0, x: 80 }}
-                 whileInView={{ opacity: 1, x: 0 }}
-                 viewport={{ once: true }}
-                 transition={{ duration: 1.2, delay: i * 0.2, ease: [0.16, 1, 0.3, 1] }}
-                 className="group cursor-none flex-none w-[85vw] md:w-auto snap-center"
-               >
-                 <div className="aspect-[2/3] overflow-hidden mb-8 border border-black/5 shadow-2xl relative">
-                    <img src={col.img} className="w-full h-full object-cover group-hover:scale-110 transition-all duration-1000" alt={col.title} />
-                    <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-all duration-700" />
-                 </div>
-                 <div className="text-left md:text-center">
-                    <span className="font-mono text-[9px] text-[#8B5E3C] tracking-widest block">{col.id}</span>
-                    <h3 className="font-serif text-2xl mt-2 italic group-hover:text-[#8B5E3C] transition-colors">{col.title}</h3>
-                 </div>
-               </motion.div>
-             ))}
-          </div>
-       </div>
-    </section>
-
-    {/* SECTION 5: EXHIBITIONS */}
-    <section id="exhibitions" className="bg-[#D9D2C5] py-16 md:py-32 px-8 md:px-24">
-       <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16 md:mb-24 space-y-6 md:space-y-8">
-             <span className="font-mono text-[10px] uppercase tracking-[1em] text-[#8B5E3C]">Presence</span>
-             <h2 className="font-serif text-6xl text-black tracking-tighter italic">Global Schedule.</h2>
-          </div>
-          
-          <div className="space-y-4">
-             {EXHIBITIONS.map((ex, i) => (
-               <motion.div 
-                 key={i} 
-                 initial={{ opacity: 0, y: 40 }}
-                 whileInView={{ opacity: 1, y: 0 }}
-                 viewport={{ once: true }}
-                 transition={{ duration: 1.2, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                 className="group cursor-none py-10 border-b border-black/5 flex flex-col md:flex-row justify-between items-center gap-12 hover:bg-black/[0.02] px-12 transition-all duration-700"
-               >
-                 <div className="flex flex-col md:flex-row items-center gap-12 md:gap-24">
-                    <span className="font-serif text-2xl text-[#8B5E3C] italic">{ex.date}</span>
-                    <div className="text-center md:text-left">
-                       <h3 className="font-serif text-3xl text-black tracking-tight">{ex.title}</h3>
-                       <p className="font-sans text-sm text-black/50 mt-2">{ex.location}</p>
-                    </div>
-                 </div>
-                 <button className="px-12 py-4 border border-black/10 hover:border-[#8B5E3C] hover:text-[#8B5E3C] text-black/40 font-sans text-[9px] uppercase tracking-[0.4em] transition-all duration-700">
-                    {ex.status}
-                 </button>
-               </motion.div>
-             ))}
-          </div>
-       </div>
-    </section>
-
-    {/* SECTION 6: THE PRIVATE VIEW */}
-    <section id="private" className="bg-[#F9F8F6] py-16 md:py-32 px-8 md:px-24 overflow-hidden border-t border-black/5">
-       <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col items-center text-center mb-16 md:mb-24 gap-6">
-             <div className="space-y-4">
-                <span className="font-mono text-[10px] uppercase tracking-[0.8em] text-[#C5A059] block">The Concierge</span>
-                <h2 className="font-serif text-6xl md:text-8xl tracking-tighter text-black leading-none italic font-light">Exclusive <br className="hidden md:block" /> Access.</h2>
-             </div>
-             <p className="font-sans text-sm md:text-base text-black/60 max-w-md leading-loose">
-                Collectors within our circle gain access to private directives and archival sketches.
-             </p>
-          </div>
-
           {/* Desktop: Elastic Carousel | Mobile: Horizontal Swipe Carousel */}
           <div className="flex overflow-x-auto snap-x snap-mandatory md:overflow-hidden md:flex-row h-[400px] md:h-[650px] gap-4 mb-16 md:mb-24 scrollbar-hide pb-8 md:pb-0" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-             {EXPERIMENTAL_GALLERY.map((img, i) => {
+             {[...COLLECTIONS.map(c => c.img), ...EXPERIMENTAL_GALLERY, IMAGES.studio3].map((img, i) => {
                const isActive = activeAccordion === i;
                return (
                  <motion.div 
@@ -335,13 +264,13 @@ export const HomeView: React.FC<HomeViewProps> = ({
                    initial={{ opacity: 0, y: 80 }}
                    whileInView={{ opacity: 1, y: 0 }}
                    viewport={{ once: true }}
-                   transition={{ duration: 1.2, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                   transition={{ duration: 1.2, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
                    onMouseEnter={() => setActiveAccordion(i)}
                    className={`relative group overflow-hidden border border-black/5 shadow-xl md:shadow-2xl bg-[#0a0a0a] transition-all duration-700 ease-[0.16,1,0.3,1] ${
                      isActive ? 'md:flex-[6]' : 'md:flex-[1]'
                    } aspect-[4/5] md:aspect-auto flex-none w-[85vw] md:w-auto snap-center cursor-none`}
                  >
-                   <img src={img} className={`w-full h-full object-cover transition-all duration-1000 ease-out group-hover:scale-105 ${!isActive && 'md:opacity-60 md:grayscale'}`} alt="Private Archive" />
+                   <img src={img} className={`w-full h-full object-cover transition-all duration-1000 ease-out group-hover:scale-105 ${!isActive && 'md:opacity-60 md:grayscale'}`} alt="Series Flow" />
                    
                    <div className={`absolute inset-0 transition-all duration-700 flex flex-col justify-end p-8 ${isActive ? 'bg-gradient-to-t from-black/90 via-black/20 to-transparent' : 'bg-black/40'}`}>
                       <AnimatePresence>
@@ -354,7 +283,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                              className="w-full flex flex-col md:flex-row justify-between items-start md:items-end gap-6"
                            >
                              <div className="text-left w-full overflow-hidden">
-                               <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-[#C5A059] mb-2 drop-shadow-md">Private Study 00{i+1}</p>
+                               <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-[#C5A059] mb-2 drop-shadow-md">Curated Study 00{i+1}</p>
                                <p className="font-serif text-2xl md:text-5xl text-white italic tracking-tighter drop-shadow-lg whitespace-nowrap">Archive File</p>
                              </div>
                              <button className="shrink-0 px-4 md:px-6 py-3 md:py-4 border border-white/20 text-white font-sans text-[9px] uppercase tracking-widest hover:bg-white hover:text-black transition-colors cursor-none backdrop-blur-sm">
@@ -368,28 +297,10 @@ export const HomeView: React.FC<HomeViewProps> = ({
                );
              })}
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center border-t border-black/5 pt-16 md:pt-24">
-             <div className="space-y-12">
-                <p className="font-sans text-sm md:text-base text-black/60 leading-[2.5] max-w-lg">
-                   Collectors within our circle gain access to private directives, archival sketches, and early acquisition opportunities before public entry.
-                </p>
-                <div className="flex flex-col gap-6">
-                   <div className="flex items-center gap-6 group cursor-none">
-                      <div className="w-12 h-12 rounded-full border border-black/10 flex items-center justify-center group-hover:bg-[#C5A059] group-hover:border-[#C5A059] transition-all duration-700">
-                         <Mail size={16} className="text-black group-hover:text-black" />
-                      </div>
-                      <span className="font-sans text-[11px] uppercase tracking-widest text-black/70">Join the Private Archive</span>
-                   </div>
-                </div>
-             </div>
-             <div className="aspect-video overflow-hidden border border-black/5 shadow-2xl relative group cursor-none">
-                <img src={IMAGES.studio3} className="w-full h-full object-cover transition-transform duration-[5s] group-hover:scale-110" alt="Studio View" />
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-700" />
-             </div>
-          </div>
        </div>
     </section>
+
+    {/* DELETED SECTIONS 5 & 6 */}
 
     {/* DELETED SECTION 7 */}
   </>
