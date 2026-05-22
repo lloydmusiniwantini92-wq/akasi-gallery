@@ -14,7 +14,7 @@ export const ShopView: React.FC<ShopViewProps> = ({ products, repoStatus, onSele
   <motion.div 
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
-    className="bg-white min-h-screen pt-24 pb-24 px-8 md:px-24"
+    className="bg-[#D9D2C5] min-h-screen pt-24 pb-24 px-8 md:px-24"
   >
     <div className="max-w-7xl mx-auto">
       <div className="mb-24 flex flex-col md:flex-row justify-between items-end gap-12">
