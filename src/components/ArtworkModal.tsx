@@ -51,7 +51,7 @@ export default function ArtworkModal({
     onClose();
     setTimeout(() => {
       const el = document.getElementById("shop");
-      if (el) el.scrollIntoView({ behavior: "smooth" });
+      if (el) el.scrollIntoView({ behavior: "auto" });
     }, 400);
   };
 

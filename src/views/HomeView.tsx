@@ -110,7 +110,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
         transition={{ duration: 1.5, delay: 2, ease: [0.16, 1, 0.3, 1] }}
         onClick={() => {
           const section = document.getElementById('masterpieces');
-          section?.scrollIntoView({ behavior: 'smooth' });
+          section?.scrollIntoView({ behavior: 'auto' });
         }}
         className="absolute bottom-20 right-6 md:bottom-24 md:right-24 z-30 group flex items-center gap-6 cursor-none"
       >

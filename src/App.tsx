@@ -80,10 +80,10 @@ export default function App() {
       if (sectionId) {
         setTimeout(() => {
           const el = document.getElementById(sectionId);
-          if (el) el.scrollIntoView({ behavior: 'smooth' });
+          if (el) el.scrollIntoView({ behavior: 'auto' });
         }, 100);
       } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: 'auto' });
       }
     };
 
@@ -97,7 +97,7 @@ export default function App() {
     if (initialSectionId) {
       setTimeout(() => {
         const el = document.getElementById(initialSectionId);
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
+        if (el) el.scrollIntoView({ behavior: 'auto' });
       }, 500);
     }
 
@@ -181,10 +181,10 @@ export default function App() {
     if (sectionId) {
       setTimeout(() => {
         const el = document.getElementById(sectionId);
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
+        if (el) el.scrollIntoView({ behavior: 'auto' });
       }, 100);
     } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: 'auto' });
     }
   };
 
