@@ -53,6 +53,7 @@ export default function App() {
 
   const scrollPositions = useRef<Record<string, number>>({});
   const pendingScroll = useRef<{ sectionId?: string; y?: number } | null>(null);
+  const isTransitioning = useRef(false);
 
   useEffect(() => {
     if ('scrollRestoration' in window.history) {
@@ -64,7 +65,9 @@ export default function App() {
     const timer = setTimeout(() => setIsLoading(false), 2200);
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
-      scrollPositions.current[view] = window.scrollY;
+      if (!isTransitioning.current) {
+        scrollPositions.current[view] = window.scrollY;
+      }
     };
     const handleMouseMove = (e: MouseEvent) => setCursorPos({ x: e.clientX, y: e.clientY });
 
@@ -93,6 +96,7 @@ export default function App() {
           sectionId, 
           y: sectionId ? undefined : (scrollPositions.current[validatedView] || 0) 
         };
+        isTransitioning.current = true;
         setView(validatedView);
       }
     };
@@ -201,6 +205,7 @@ export default function App() {
         sectionId, 
         y: sectionId ? undefined : 0 
       };
+      isTransitioning.current = true;
       setView(newView);
     }
   };
@@ -264,13 +269,22 @@ export default function App() {
         onExitComplete={() => {
           if (pendingScroll.current) {
             const { sectionId, y } = pendingScroll.current;
-            if (sectionId) {
-              const el = document.getElementById(sectionId);
-              if (el) el.scrollIntoView({ behavior: 'auto' });
-            } else if (y !== undefined) {
-              window.scrollTo({ top: y, behavior: 'auto' });
-            }
+            
+            // Wait 50ms for the new view to actually mount and render its height
+            // before we attempt to restore the scroll position.
+            setTimeout(() => {
+              if (sectionId) {
+                const el = document.getElementById(sectionId);
+                if (el) el.scrollIntoView({ behavior: 'auto' });
+              } else if (y !== undefined) {
+                window.scrollTo({ top: y, behavior: 'auto' });
+              }
+              isTransitioning.current = false;
+            }, 50);
+            
             pendingScroll.current = null;
+          } else {
+            isTransitioning.current = false;
           }
         }}
       >
