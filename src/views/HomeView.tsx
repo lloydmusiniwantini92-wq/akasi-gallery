@@ -169,15 +169,17 @@ export const HomeView: React.FC<HomeViewProps> = ({
           </EditorialReveal>
           
           <EditorialReveal delay={0.5}>
-            <button 
-              onClick={() => navigateTo('about')}
-              className="group mt-12 px-16 py-6 md:py-8 bg-[#8B5E3C] text-white hover:bg-black transition-colors duration-700 cursor-none inline-flex items-center gap-8 shadow-xl"
-            >
-              <span className="font-sans text-[11px] uppercase tracking-[0.5em]">
-                The Full Narrative
-              </span>
-              <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform duration-700" />
-            </button>
+            <div className="flex justify-center md:justify-start -ml-12 md:ml-0 w-[calc(100%+3rem)] md:w-auto mt-12 md:mt-0">
+              <button 
+                onClick={() => navigateTo('about')}
+                className="group px-12 md:px-16 py-6 md:py-8 bg-[#8B5E3C] text-white hover:bg-black transition-colors duration-700 cursor-none inline-flex items-center gap-6 md:gap-8 shadow-xl"
+              >
+                <span className="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.5em]">
+                  The Full Narrative
+                </span>
+                <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform duration-700" />
+              </button>
+            </div>
           </EditorialReveal>
         </div>
       </div>
