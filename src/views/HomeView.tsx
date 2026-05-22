@@ -22,10 +22,17 @@ export const HomeView: React.FC<HomeViewProps> = ({
   <>
     {/* SECTION 1: HERO */}
     <section id="home" className="h-screen relative overflow-hidden bg-black">
+      {/* Mobile Static Hero */}
+      <div className="absolute inset-0 z-0 md:hidden">
+         <img src={HERO_SLIDES[0]} className="w-full h-full object-cover" alt="Exhibition Slide" />
+         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/40" />
+      </div>
+
+      {/* Desktop Carousel */}
       {HERO_SLIDES.map((slide, i) => (
         <motion.div
           key={i}
-          className={`absolute inset-0 z-0 ${i !== 0 ? 'hidden md:block' : ''}`}
+          className="absolute inset-0 z-0 hidden md:block"
           initial={{ opacity: 0, scale: 1.08 }}
           animate={{ 
             opacity: i === heroIndex ? 1 : 0,
@@ -319,8 +326,8 @@ export const HomeView: React.FC<HomeViewProps> = ({
           </div>
 
           {/* Desktop: Elastic Carousel | Mobile: Horizontal Swipe Carousel */}
-          <div className="flex overflow-x-auto snap-x snap-mandatory md:overflow-hidden md:flex-row h-auto md:h-[650px] gap-4 mb-16 md:mb-24 scrollbar-hide pb-8 md:pb-0" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-             {EXPERIMENTAL_GALLERY.slice(0, 3).map((img, i) => {
+          <div className="flex overflow-x-auto snap-x snap-mandatory md:overflow-hidden md:flex-row h-[400px] md:h-[650px] gap-4 mb-16 md:mb-24 scrollbar-hide pb-8 md:pb-0" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+             {EXPERIMENTAL_GALLERY.map((img, i) => {
                const isActive = activeAccordion === i;
                return (
                  <motion.div 
@@ -328,7 +335,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                    initial={{ opacity: 0, y: 80 }}
                    whileInView={{ opacity: 1, y: 0 }}
                    viewport={{ once: true }}
-                   transition={{ duration: 1.2, delay: i * 0.2, ease: [0.16, 1, 0.3, 1] }}
+                   transition={{ duration: 1.2, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
                    onMouseEnter={() => setActiveAccordion(i)}
                    className={`relative group overflow-hidden border border-black/5 shadow-xl md:shadow-2xl bg-[#0a0a0a] transition-all duration-700 ease-[0.16,1,0.3,1] ${
                      isActive ? 'md:flex-[6]' : 'md:flex-[1]'
@@ -348,9 +355,9 @@ export const HomeView: React.FC<HomeViewProps> = ({
                            >
                              <div className="text-left w-full overflow-hidden">
                                <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-[#C5A059] mb-2 drop-shadow-md">Private Study 00{i+1}</p>
-                               <p className="font-serif text-4xl md:text-5xl text-white italic tracking-tighter drop-shadow-lg whitespace-nowrap">Archive File</p>
+                               <p className="font-serif text-2xl md:text-5xl text-white italic tracking-tighter drop-shadow-lg whitespace-nowrap">Archive File</p>
                              </div>
-                             <button className="shrink-0 px-6 py-4 border border-white/20 text-white font-sans text-[9px] uppercase tracking-widest hover:bg-white hover:text-black transition-colors cursor-none backdrop-blur-sm">
+                             <button className="shrink-0 px-4 md:px-6 py-3 md:py-4 border border-white/20 text-white font-sans text-[9px] uppercase tracking-widest hover:bg-white hover:text-black transition-colors cursor-none backdrop-blur-sm">
                                Unlock
                              </button>
                            </motion.div>
@@ -384,65 +391,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
        </div>
     </section>
 
-    {/* SECTION 7: EXPERIMENTAL FLOW (PARALLAX ON DESKTOP, SNAP ON MOBILE) */}
-    <section className="bg-[#D9D2C5] py-24 md:py-32 overflow-hidden border-t border-black/5 relative">
-      
-      {/* MOBILE: NATIVE SNAP SCROLL */}
-      <div className="md:hidden flex gap-4 overflow-x-auto snap-x snap-mandatory px-8 pb-12 scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-         {[...EXPERIMENTAL_GALLERY, ...EXPERIMENTAL_GALLERY].map((img, i) => (
-           <div key={i} className="flex-none w-[80vw] aspect-[4/5] snap-center overflow-hidden border border-black/5 shadow-xl">
-              <img src={img} className="w-full h-full object-cover" alt="Gallery Flow" />
-           </div>
-         ))}
-      </div>
-
-      {/* DESKTOP: PARALLAX COVERFLOW CAROUSEL */}
-      <div className="hidden md:flex relative h-[600px] items-center justify-center w-full">
-         <div className="relative w-full max-w-6xl h-full flex items-center justify-center">
-            {[...EXPERIMENTAL_GALLERY, ...EXPERIMENTAL_GALLERY].slice(0, 5).map((img, i) => {
-               // Calculate relative distance from center
-               const distance = i - activeCarouselIndex;
-               const clampedDistance = Math.max(-2, Math.min(2, distance));
-               const isActive = distance === 0;
-
-               return (
-                 <motion.div
-                   key={i}
-                   onClick={() => setActiveCarouselIndex(i)}
-                   className="absolute cursor-none origin-center"
-                   animate={{
-                     x: clampedDistance * 320,
-                     scale: isActive ? 1 : 0.8 - Math.abs(clampedDistance) * 0.05,
-                     zIndex: 10 - Math.abs(clampedDistance),
-                     opacity: isActive ? 1 : 0.4 - Math.abs(clampedDistance) * 0.15,
-                   }}
-                   transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                   style={{
-                     width: "400px",
-                     height: "500px",
-                     filter: isActive ? "blur(0px)" : `blur(${Math.abs(clampedDistance) * 2}px)`
-                   }}
-                 >
-                   <div className="w-full h-full overflow-hidden border border-black/5 shadow-2xl bg-black relative group">
-                      <img src={img} className="w-full h-full object-cover transition-transform duration-[3s] group-hover:scale-105" alt="Gallery Flow" />
-                      {!isActive && <div className="absolute inset-0 bg-black/20" />}
-                   </div>
-                 </motion.div>
-               );
-            })}
-         </div>
-         {/* Simple Navigation Hints */}
-         <div className="absolute bottom-8 flex gap-4">
-            {[...EXPERIMENTAL_GALLERY, ...EXPERIMENTAL_GALLERY].slice(0, 5).map((_, i) => (
-               <button 
-                  key={i}
-                  onClick={() => setActiveCarouselIndex(i)}
-                  className={`h-px transition-all duration-500 cursor-none ${activeCarouselIndex === i ? 'w-12 bg-black' : 'w-4 bg-black/20'}`}
-               />
-            ))}
-         </div>
-      </div>
-    </section>
+    {/* DELETED SECTION 7 */}
   </>
   );
 };
