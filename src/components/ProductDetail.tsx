@@ -10,8 +10,10 @@ interface ProductDetailProps {
 
 export const ProductDetail: React.FC<ProductDetailProps> = ({ product, onClose, onAddToCart }) => {
   const [selectedVariantId, setSelectedVariantId] = useState<number | string>('');
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
 
   useEffect(() => {
+    setActiveImageIndex(0);
     if (product && product.variants && product.variants.length > 0) {
       setSelectedVariantId(product.variants[0].id);
     } else {
@@ -55,8 +57,23 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ product, onClose, 
           {/* Left Column: Image */}
           <div className="w-full md:w-1/2 p-6 md:p-8 border-b md:border-b-0 md:border-r border-black/5 bg-white flex flex-col justify-center">
             <div className="aspect-square bg-stone-100 overflow-hidden relative shadow-xl">
-              <img src={product.image || product.img} alt={product.title} className="w-full h-full object-cover" />
+              <img src={(product.images && product.images[activeImageIndex]) || product.image || product.img} alt={product.title} className="w-full h-full object-cover" />
             </div>
+
+            {product.images && product.images.length > 1 && (
+              <div className="flex gap-4 mt-6 overflow-x-auto scrollbar-hide py-2" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                {product.images.map((imgUrl: string, idx: number) => (
+                   <button 
+                     key={idx} 
+                     onClick={() => setActiveImageIndex(idx)}
+                     className={`w-16 h-16 flex-shrink-0 border ${activeImageIndex === idx ? 'border-[#C5A059]' : 'border-black/5'} overflow-hidden transition-all duration-300 hover:border-[#C5A059]/50 cursor-none`}
+                   >
+                      <img src={imgUrl} className="w-full h-full object-cover" alt="" />
+                   </button>
+                ))}
+              </div>
+            )}
+
             <div className="mt-8 text-center md:text-left">
               <h2 className="font-serif text-3xl md:text-4xl text-black tracking-tight">{product.title}</h2>
               <p className="font-mono text-[9px] uppercase tracking-[0.4em] text-[#C5A059] mt-2">

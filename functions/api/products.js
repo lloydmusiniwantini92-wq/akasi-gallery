@@ -80,6 +80,7 @@ export async function onRequest(context) {
     const translatedProducts = result.data.map(product => {
       const defaultImg = product.images.find(img => img.is_default) || product.images[0];
       const imageSrc = defaultImg ? defaultImg.src : '';
+      const allImages = product.images.map(img => img.src);
 
       const activeVariants = product.variants
         .filter(v => v.is_enabled !== false)
@@ -97,6 +98,7 @@ export async function onRequest(context) {
         title: product.title,
         description: product.description || '',
         image: imageSrc,
+        images: allImages,
         price: basePrice,
         variants: activeVariants
       };
