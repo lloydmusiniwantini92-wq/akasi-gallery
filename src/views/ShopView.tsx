@@ -25,7 +25,7 @@ export const ShopView: React.FC<ShopViewProps> = ({ products, repoStatus, onSele
             </div>
           </EditorialReveal>
           <EditorialReveal delay={0.2}>
-            <h1 className="font-serif text-6xl md:text-9xl tracking-tighter text-black leading-none uppercase font-light">The Repository.</h1>
+            <h1 className="font-serif text-6xl md:text-9xl tracking-tighter text-black leading-none italic">The Repository.</h1>
           </EditorialReveal>
         </div>
         <EditorialReveal delay={0.3}>

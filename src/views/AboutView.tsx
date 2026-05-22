@@ -133,7 +133,7 @@ export const AboutView: React.FC<AboutViewProps> = ({ navigateTo }) => {
                  <span className="font-mono text-[9px] uppercase tracking-[0.5em] text-[#C5A059] block mb-6">02 / Process</span>
                </EditorialReveal>
                <EditorialReveal delay={0.2}>
-                 <h2 className="font-serif text-5xl md:text-7xl text-[#1A1A1A] tracking-tighter italic font-light leading-none">
+                 <h2 className="font-serif text-5xl md:text-7xl text-[#1A1A1A] tracking-tighter italic leading-none">
                     Archival Study.
                  </h2>
                </EditorialReveal>
@@ -191,7 +191,7 @@ export const AboutView: React.FC<AboutViewProps> = ({ navigateTo }) => {
              <span className="font-mono text-[9px] uppercase tracking-[0.8em] text-black/40 mb-16 block">03 / The Collection</span>
            </EditorialReveal>
            <EditorialReveal delay={0.3}>
-             <h2 className="font-serif text-6xl md:text-9xl text-black tracking-tighter mb-24 italic font-light leading-none">
+             <h2 className="font-serif text-6xl md:text-9xl text-black tracking-tighter mb-24 italic leading-none">
                Explore <br/> the Works.
              </h2>
            </EditorialReveal>

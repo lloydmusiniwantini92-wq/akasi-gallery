@@ -12,7 +12,7 @@ export const Exhibitions: React.FC = () => (
             <span className="font-mono text-[10px] uppercase tracking-[0.8em] text-[#C5A059] block">Agenda</span>
           </EditorialReveal>
           <EditorialReveal delay={0.2}>
-            <h2 className="font-serif text-5xl md:text-7xl tracking-tighter leading-none uppercase font-light">Upcoming Events.</h2>
+            <h2 className="font-serif text-5xl md:text-7xl tracking-tighter leading-none italic text-black">Upcoming Events.</h2>
           </EditorialReveal>
         </div>
         <EditorialReveal delay={0.3}>

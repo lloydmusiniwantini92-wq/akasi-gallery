@@ -151,7 +151,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
           <span className="font-mono text-[10px] uppercase tracking-[0.8em] text-[#8B5E3C] mb-8 block">The Manifesto</span>
         </EditorialReveal>
         <EditorialReveal delay={0.2}>
-          <h2 className="font-serif text-5xl md:text-7xl lg:text-8xl leading-[1] tracking-tighter text-black mb-16 font-light italic">
+          <h2 className="font-serif text-5xl md:text-7xl lg:text-8xl leading-[1] tracking-tighter text-black mb-16 italic">
             "I want my art to feel like a <span className="text-[#8B5E3C]">held breath.</span>"
           </h2>
         </EditorialReveal>
@@ -194,7 +194,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <span className="font-mono text-[10px] uppercase tracking-[0.8em] text-[#C5A059] block">Selected Works</span>
             </EditorialReveal>
             <EditorialReveal delay={0.2}>
-              <h2 className="font-serif text-6xl md:text-8xl tracking-tighter text-black leading-none uppercase font-light">The Shop.</h2>
+              <h2 className="font-serif text-6xl md:text-8xl tracking-tighter text-black leading-none italic">The Shop.</h2>
             </EditorialReveal>
           </div>
           <EditorialReveal delay={0.3}>
