@@ -4,6 +4,7 @@ import { Check, Mail, Globe, ArrowRight, Instagram, Linkedin, Twitter } from 'lu
 import { IMAGES, HERO_SLIDES, ABOUT_IMAGES, EXPERIMENTAL_GALLERY } from '../constants/assets';
 import { MASTERPIECES, COLLECTIONS, EXHIBITIONS, HERO_SEQUENCE } from '../data/galleryData';
 import { PrivateViewOverlay } from '../components/PrivateViewOverlay';
+import { EditorialReveal } from '../components/EditorialReveal';
 
 interface HomeViewProps {
   heroIndex: number;
@@ -146,25 +147,28 @@ export const HomeView: React.FC<HomeViewProps> = ({
       </div>
 
       <div className="md:w-1/2 flex flex-col justify-center p-8 md:p-24 md:pl-32 relative z-20">
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-        >
+        <EditorialReveal delay={0.1}>
           <span className="font-mono text-[10px] uppercase tracking-[0.8em] text-[#8B5E3C] mb-8 block">The Manifesto</span>
+        </EditorialReveal>
+        <EditorialReveal delay={0.2}>
           <h2 className="font-serif text-5xl md:text-7xl lg:text-8xl leading-[1] tracking-tighter text-black mb-16 font-light italic">
             "I want my art to feel like a <span className="text-[#8B5E3C]">held breath.</span>"
           </h2>
-          
-          <div className="space-y-12 pl-12 border-l border-black/10">
+        </EditorialReveal>
+        
+        <div className="space-y-12 pl-12 border-l border-black/10">
+          <EditorialReveal delay={0.3}>
             <p className="font-sans text-sm md:text-base text-black/60 tracking-wide leading-[2.5] max-w-xl">
               Akasi Osei is an emerging artist whose work explores identity, resilience, and the embodied experience of everyday life. Influenced by a cross-cultural perspective, her practice reflects an ongoing negotiation between inherited histories and lived experience.
             </p>
+          </EditorialReveal>
+          <EditorialReveal delay={0.4}>
             <p className="font-sans text-sm md:text-base text-black/60 tracking-wide leading-[2.5] max-w-xl">
               Through hybrid, symbolic figures and layered compositions, she transforms uncertainty into opportunities for self-definition with optimism.
             </p>
-            
+          </EditorialReveal>
+          
+          <EditorialReveal delay={0.5}>
             <button 
               onClick={() => navigateTo('about')}
               className="group mt-12 px-16 py-6 md:py-8 bg-[#8B5E3C] text-white hover:bg-black transition-colors duration-700 cursor-none inline-flex items-center gap-8 shadow-xl"
@@ -174,8 +178,8 @@ export const HomeView: React.FC<HomeViewProps> = ({
               </span>
               <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform duration-700" />
             </button>
-          </div>
-        </motion.div>
+          </EditorialReveal>
+        </div>
       </div>
     </motion.section>
 
@@ -184,22 +188,37 @@ export const HomeView: React.FC<HomeViewProps> = ({
       <div className="max-w-7xl mx-auto">
         <div className="mb-16 md:mb-24 flex flex-col items-center text-center gap-6">
           <div className="space-y-4">
-            <span className="font-mono text-[10px] uppercase tracking-[0.8em] text-[#C5A059] block">Selected Works</span>
-            <h2 className="font-serif text-6xl md:text-8xl tracking-tighter text-black leading-none uppercase font-light">The Shop.</h2>
+            <EditorialReveal delay={0.1}>
+              <span className="font-mono text-[10px] uppercase tracking-[0.8em] text-[#C5A059] block">Selected Works</span>
+            </EditorialReveal>
+            <EditorialReveal delay={0.2}>
+              <h2 className="font-serif text-6xl md:text-8xl tracking-tighter text-black leading-none uppercase font-light">The Shop.</h2>
+            </EditorialReveal>
           </div>
-          <p className="font-sans text-sm md:text-base text-black/60 max-w-md leading-loose">
-            A permanent exploration of identity through mixed media, gold leaf, and high-fidelity textures.
-          </p>
+          <EditorialReveal delay={0.3}>
+            <p className="font-sans text-sm md:text-base text-black/60 max-w-md leading-loose">
+              A permanent exploration of identity through mixed media, gold leaf, and high-fidelity textures.
+            </p>
+          </EditorialReveal>
         </div>
+
+        {/* Mobile Swipe Indicator */}
+        <EditorialReveal delay={0.4}>
+           <div className="md:hidden flex items-center justify-end mb-6 w-full">
+              <span className="font-mono text-[9px] uppercase tracking-widest text-[#C5A059] flex items-center gap-2">
+                Swipe to explore <ArrowRight size={12} className="animate-pulse" />
+              </span>
+           </div>
+        </EditorialReveal>
 
         <div className="flex overflow-x-auto snap-x snap-mandatory gap-8 pb-12 scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           {MASTERPIECES.map((art, i) => (
             <motion.div 
               key={i} 
-              initial={{ opacity: 0, x: 80 }} 
-              whileInView={{ opacity: 1, x: 0 }} 
-              viewport={{ once: true }} 
-              transition={{ duration: 1.2, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }} 
+              initial={{ opacity: 0, y: 100, scale: 0.95 }} 
+              whileInView={{ opacity: 1, y: 0, scale: 1 }} 
+              viewport={{ once: true, margin: "-15%" }} 
+              transition={{ duration: 1.5, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }} 
               onMouseEnter={() => setHoveredId(i)}
               onMouseLeave={() => setHoveredId(null)}
               className="group relative cursor-none flex-none w-[85vw] md:w-[450px] snap-center"
@@ -245,13 +264,28 @@ export const HomeView: React.FC<HomeViewProps> = ({
        <div className="max-w-7xl mx-auto px-8 md:px-24 relative z-10">
           <div className="flex flex-col items-center text-center mb-16 md:mb-24 gap-6">
              <div className="space-y-4">
-                <span className="font-mono text-[10px] uppercase tracking-[0.8em] text-[#8B5E3C] block">Curated Sets</span>
-                <h2 className="font-serif text-6xl md:text-8xl tracking-tighter italic leading-none text-black">The Series.</h2>
+                <EditorialReveal delay={0.1}>
+                  <span className="font-mono text-[10px] uppercase tracking-[0.8em] text-[#8B5E3C] block">Curated Sets</span>
+                </EditorialReveal>
+                <EditorialReveal delay={0.2}>
+                  <h2 className="font-serif text-6xl md:text-8xl tracking-tighter italic leading-none text-black">The Series.</h2>
+                </EditorialReveal>
              </div>
-             <p className="font-sans text-sm md:text-base text-black/60 leading-loose max-w-md">
-                Each series is a deep dive into a specific narrative arc, authored over months of studio seclusion.
-             </p>
+             <EditorialReveal delay={0.3}>
+               <p className="font-sans text-sm md:text-base text-black/60 leading-loose max-w-md">
+                  Each series is a deep dive into a specific narrative arc, authored over months of studio seclusion.
+               </p>
+             </EditorialReveal>
           </div>
+             
+          {/* Mobile Swipe Indicator */}
+          <EditorialReveal delay={0.4}>
+             <div className="md:hidden flex items-center justify-end mb-6 w-full">
+                <span className="font-mono text-[9px] uppercase tracking-widest text-[#8B5E3C] flex items-center gap-2">
+                  Swipe to explore <ArrowRight size={12} className="animate-pulse" />
+                </span>
+             </div>
+          </EditorialReveal>
              
           {/* Desktop: Elastic Carousel | Mobile: Horizontal Swipe Carousel */}
           <div className="flex overflow-x-auto snap-x snap-mandatory md:overflow-hidden md:flex-row h-[400px] md:h-[650px] gap-4 mb-16 md:mb-24 scrollbar-hide pb-8 md:pb-0" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
@@ -260,10 +294,10 @@ export const HomeView: React.FC<HomeViewProps> = ({
                return (
                  <motion.div 
                    key={i}
-                   initial={{ opacity: 0, y: 80 }}
-                   whileInView={{ opacity: 1, y: 0 }}
-                   viewport={{ once: true }}
-                   transition={{ duration: 1.2, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                   initial={{ opacity: 0, y: 100, scale: 0.95 }}
+                   whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                   viewport={{ once: true, margin: "-15%" }}
+                   transition={{ duration: 1.5, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
                    onMouseEnter={() => setActiveAccordion(i)}
                    className={`relative group overflow-hidden border border-black/5 shadow-xl md:shadow-2xl bg-[#0a0a0a] transition-all duration-700 ease-[0.16,1,0.3,1] ${
                      isActive ? 'md:flex-[6]' : 'md:flex-[1]'

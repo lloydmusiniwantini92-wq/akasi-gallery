@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { ABOUT_IMAGES, EXPERIMENTAL_GALLERY } from '../constants/assets';
 import { COLLECTIONS } from '../data/galleryData';
+import { EditorialReveal } from '../components/EditorialReveal';
 
 interface AboutViewProps {
   navigateTo: (view: string, section?: string) => void;
@@ -75,57 +76,35 @@ export const AboutView: React.FC<AboutViewProps> = ({ navigateTo }) => {
            <div className="max-w-xl mx-auto flex flex-col gap-16 md:gap-[20vh]">
              
              {/* Block 1 */}
-             <motion.div 
-               initial={{ opacity: 0, y: 40 }}
-               whileInView={{ opacity: 1, y: 0 }}
-               viewport={{ once: true, margin: "-100px" }}
-               transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-             >
+             <EditorialReveal delay={0.1}>
                <span className="font-mono text-[9px] uppercase tracking-[0.8em] text-[#C5A059] block mb-12">01 / Origin</span>
                <p className="font-serif text-2xl md:text-4xl text-[#1A1A1A] leading-[1.4] tracking-tight italic">
                  An emerging artist from Kalamazoo, Michigan, and a first-generation American of Zimbabwean and Ghanaian descent.
                </p>
-             </motion.div>
+             </EditorialReveal>
 
              {/* Block 2 */}
-             <motion.div 
-               initial={{ opacity: 0, y: 40 }}
-               whileInView={{ opacity: 1, y: 0 }}
-               viewport={{ once: true, margin: "-100px" }}
-               transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-             >
+             <EditorialReveal delay={0.2}>
                <p className="font-sans text-sm md:text-base text-black/60 leading-relaxed text-justify">
                  Her work explores identity, resilience, and the embodied experience of everyday life. Influenced by a cross-cultural perspective, her practice reflects an ongoing negotiation between inherited histories and lived experience, transforming uncertainty into opportunities for self-definition with optimism.
                </p>
-             </motion.div>
+             </EditorialReveal>
 
              {/* Block 3 */}
-             <motion.div 
-               initial={{ opacity: 0, y: 40 }}
-               whileInView={{ opacity: 1, y: 0 }}
-               viewport={{ once: true, margin: "-100px" }}
-               transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-               className="pl-8 md:pl-16 border-l border-black/10"
-             >
+             <EditorialReveal delay={0.3} className="pl-8 md:pl-16 border-l border-black/10">
                <p className="font-sans text-sm md:text-base text-black/60 leading-relaxed">
                  Through hybrid, symbolic figures and layered compositions, Osei approaches identity as something continuously shaped and reimagined. She blends abstraction and figuration with bold color, intricate patterning, and animal-like forms.
                </p>
-             </motion.div>
+             </EditorialReveal>
              
              {/* CV Block */}
-             <motion.div 
-               initial={{ opacity: 0, y: 40 }}
-               whileInView={{ opacity: 1, y: 0 }}
-               viewport={{ once: true, margin: "-100px" }}
-               transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-               className="pt-16 border-t border-black/10"
-             >
+             <EditorialReveal delay={0.4} className="pt-16 border-t border-black/10">
                <span className="font-mono text-[9px] uppercase tracking-[0.5em] text-[#C5A059] mb-8 block">Curriculum Vitae</span>
                <div className="flex flex-col gap-6 font-sans text-sm text-black/50 leading-relaxed">
                   <p>Bachelors of Fine Arts<br/>Exhibited in Kalamazoo, Detroit, Chicago</p>
                   <p>Artist-in-Residence<br/>National Gallery of Bulawayo (2022)</p>
                </div>
-             </motion.div>
+             </EditorialReveal>
 
            </div>
         </div>
@@ -150,14 +129,20 @@ export const AboutView: React.FC<AboutViewProps> = ({ navigateTo }) => {
           
           <div className="flex flex-col md:flex-row justify-between items-end">
              <div>
-               <span className="font-mono text-[9px] uppercase tracking-[0.5em] text-[#C5A059] block mb-6">02 / Process</span>
-               <h2 className="font-serif text-5xl md:text-7xl text-[#1A1A1A] tracking-tighter italic font-light leading-none">
-                  Archival Study.
-               </h2>
+               <EditorialReveal delay={0.1}>
+                 <span className="font-mono text-[9px] uppercase tracking-[0.5em] text-[#C5A059] block mb-6">02 / Process</span>
+               </EditorialReveal>
+               <EditorialReveal delay={0.2}>
+                 <h2 className="font-serif text-5xl md:text-7xl text-[#1A1A1A] tracking-tighter italic font-light leading-none">
+                    Archival Study.
+                 </h2>
+               </EditorialReveal>
              </div>
-             <p className="font-sans text-sm text-black/40 max-w-xs mt-8 md:mt-0 leading-relaxed text-right">
-                A curated collection of process imagery, documenting the physical birth of each directive.
-             </p>
+             <EditorialReveal delay={0.3}>
+               <p className="font-sans text-sm text-black/40 max-w-xs mt-8 md:mt-0 leading-relaxed text-right">
+                  A curated collection of process imagery, documenting the physical birth of each directive.
+               </p>
+             </EditorialReveal>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
@@ -169,10 +154,10 @@ export const AboutView: React.FC<AboutViewProps> = ({ navigateTo }) => {
               return (
                 <motion.div 
                   key={i} 
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 1.2, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }}
+                  initial={{ opacity: 0, y: 100, scale: 0.95 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, margin: "-15%" }}
+                  transition={{ duration: 1.5, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }}
                   className={`group relative overflow-hidden cursor-none ${colSpan} ${aspect}`}
                 >
                   <img 
@@ -196,22 +181,28 @@ export const AboutView: React.FC<AboutViewProps> = ({ navigateTo }) => {
       <div className="relative bg-[#D9D2C5] py-24 md:py-56 px-8 md:px-24 text-center flex flex-col items-center justify-center min-h-[50vh] md:min-h-[70vh] group cursor-none overflow-hidden border-t border-black/10">
          <div className="absolute inset-0 bg-[#C5A059] transition-opacity duration-[2s] opacity-0 group-hover:opacity-10 z-0"></div>
          <motion.div 
-           initial={{ opacity: 0, scale: 0.95 }}
-           whileInView={{ opacity: 1, scale: 1 }}
-           viewport={{ once: true }}
+           initial={{ opacity: 0, y: 100, scale: 0.95 }}
+           whileInView={{ opacity: 1, y: 0, scale: 1 }}
+           viewport={{ once: true, margin: "-15%" }}
            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
            className="relative z-10 w-full max-w-4xl"
          >
-           <span className="font-mono text-[9px] uppercase tracking-[0.8em] text-black/40 mb-16 block">03 / The Collection</span>
-           <h2 className="font-serif text-6xl md:text-9xl text-black tracking-tighter mb-24 italic font-light leading-none">
-             Explore <br/> the Works.
-           </h2>
-           <button 
-             onClick={() => navigateTo('shop')}
-             className="px-12 py-5 border border-black/20 text-black font-sans text-[10px] uppercase tracking-[0.6em] hover:bg-black hover:text-white transition-all duration-700 cursor-none"
-           >
-             Enter Archive
-           </button>
+           <EditorialReveal delay={0.2}>
+             <span className="font-mono text-[9px] uppercase tracking-[0.8em] text-black/40 mb-16 block">03 / The Collection</span>
+           </EditorialReveal>
+           <EditorialReveal delay={0.3}>
+             <h2 className="font-serif text-6xl md:text-9xl text-black tracking-tighter mb-24 italic font-light leading-none">
+               Explore <br/> the Works.
+             </h2>
+           </EditorialReveal>
+           <EditorialReveal delay={0.4}>
+             <button 
+               onClick={() => navigateTo('shop')}
+               className="px-12 py-5 border border-black/20 text-black font-sans text-[10px] uppercase tracking-[0.6em] hover:bg-black hover:text-white transition-all duration-700 cursor-none"
+             >
+               Enter Archive
+             </button>
+           </EditorialReveal>
          </motion.div>
       </div>
     </motion.div>

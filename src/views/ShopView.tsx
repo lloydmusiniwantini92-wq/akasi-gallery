@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { Check, Mail, Globe, ArrowRight } from 'lucide-react';
 import { IMAGES } from '../constants/assets';
+import { EditorialReveal } from '../components/EditorialReveal';
 
 interface ShopViewProps {
   products: any[];
@@ -18,24 +19,30 @@ export const ShopView: React.FC<ShopViewProps> = ({ products, repoStatus, onSele
     <div className="max-w-7xl mx-auto">
       <div className="mb-24 flex flex-col md:flex-row justify-between items-end gap-12">
         <div className="space-y-4">
-          <div className="flex items-center gap-4 mb-4">
-            <span className="font-mono text-[9px] uppercase tracking-[0.5em] text-[#C5A059]">Viewing Room</span>
-          </div>
-          <h1 className="font-serif text-6xl md:text-9xl tracking-tighter text-black leading-none uppercase font-light">The Repository.</h1>
+          <EditorialReveal delay={0.1}>
+            <div className="flex items-center gap-4 mb-4">
+              <span className="font-mono text-[9px] uppercase tracking-[0.5em] text-[#C5A059]">Viewing Room</span>
+            </div>
+          </EditorialReveal>
+          <EditorialReveal delay={0.2}>
+            <h1 className="font-serif text-6xl md:text-9xl tracking-tighter text-black leading-none uppercase font-light">The Repository.</h1>
+          </EditorialReveal>
         </div>
-        <p className="font-sans text-sm text-black/60 max-w-sm leading-loose">
-          Authorized limited editions and unique physical directives, available for secure acquisition into private archives.
-        </p>
+        <EditorialReveal delay={0.3}>
+          <p className="font-sans text-sm text-black/60 max-w-sm leading-loose">
+            Authorized limited editions and unique physical directives, available for secure acquisition into private archives.
+          </p>
+        </EditorialReveal>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-24">
-        {products.map((product) => (
+        {products.map((product, i) => (
           <motion.div 
             key={product.id} 
-            initial={{ opacity: 0, y: 60 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 100, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, margin: "-15%" }}
+            transition={{ duration: 1.5, delay: (i % 3) * 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="group cursor-none"
           >
             <div className="aspect-[3/4] bg-[#F9F8F6] overflow-hidden relative border border-black/5 shadow-xl group-hover:shadow-2xl transition-all duration-700">
