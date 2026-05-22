@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 13, "column": 0}, "map": {"version":3,"sources":["file:///Z:/Cousin%20kaIAN/akasis-gallery/src/app/favicon.ico.mjs%20%28structured%20image%20object%29"],"sourcesContent":["import src from \"IMAGE\";\nexport default { src, width: 256, height: 256 }\n"],"names":["src","width","height"],"mappings":";;;;AAAA;;uCACe;IAAEA,KAAAA,0IAAG;IAAEC,OAAO;IAAKC,QAAQ;AAAI"}},
+    {"offset": {"line": 28, "column": 0}, "map": {"version":3,"sources":["file:///Z:/Cousin%20kaIAN/akasis-gallery/src/app/page.tsx"],"sourcesContent":["import Navigation from \"@/components/Navigation\";\nimport Hero from \"@/components/Hero\";\nimport Gallery from \"@/components/Gallery\";\nimport About from \"@/components/About\";\nimport Shop from \"@/components/Shop\";\nimport Press from \"@/components/Press\";\nimport Contact from \"@/components/Contact\";\nimport Footer from \"@/components/Footer\";\n\nexport default function Home() {\n  return (\n    <main>\n      <Navigation />\n      <Hero />\n      <Gallery />\n      <About />\n      <Shop />\n      <Press />\n      <Contact />\n      <Footer />\n    </main>\n  );\n}\n"],"names":["Home","Navigation","Hero","Gallery","About","Shop","Press","Contact","Footer"],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AASe,SAASA;IACtB,qBACE,8OAAC;;0BACC,8OAACC;;;;;0BACD,8OAACC;;;;;0BACD,8OAACC;;;;;0BACD,8OAACC;;;;;0BACD,8OAACC;;;;;0BACD,8OAACC;;;;;0BACD,8OAACC;;;;;0BACD,8OAACC;;;;;;;;;;;AAGP"}}]
+}
