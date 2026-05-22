@@ -57,7 +57,7 @@ export default function App() {
     zip: '',
     country: 'US',
   });
-  const [products, setProducts] = useState(FALLBACK_PRODUCTS);
+  const [products, setProducts] = useState<any[]>([]);
   const [repoStatus, setRepoStatus] = useState('Standalone');
 
   useEffect(() => {

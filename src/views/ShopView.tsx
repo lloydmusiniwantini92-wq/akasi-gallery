@@ -36,42 +36,50 @@ export const ShopView: React.FC<ShopViewProps> = ({ products, repoStatus, onSele
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-24">
-        {products.map((product, i) => (
-          <motion.div 
-            key={product.id} 
-            initial={{ opacity: 0, y: 100, scale: 0.95 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, margin: "-15%" }}
-            transition={{ duration: 1.5, delay: (i % 3) * 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="group cursor-none"
-          >
-            <div className="aspect-[3/4] bg-[#F9F8F6] overflow-hidden relative border border-black/5 shadow-xl group-hover:shadow-2xl transition-all duration-700">
-              <img src={product.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[4s] ease-out" alt={product.title} />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-700 flex items-center justify-center">
-                 <button 
-                    onClick={() => onSelectProduct(product)}
-                    className="px-8 py-3 bg-white text-black font-sans text-[9px] uppercase tracking-[0.4em] opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-700 hover:bg-[#C5A059]"
-                  >
-                     View Details & Add to Cart
-                  </button>
+        {products.length === 0 ? (
+          <div className="col-span-1 md:col-span-2 lg:col-span-3 text-center py-24">
+            <p className="font-mono text-xs uppercase tracking-widest text-black/40 animate-pulse">
+              Synchronizing with Printify Archive...
+            </p>
+          </div>
+        ) : (
+          products.map((product, i) => (
+            <motion.div 
+              key={product.id} 
+              initial={{ opacity: 0, y: 100, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, margin: "-15%" }}
+              transition={{ duration: 1.5, delay: (i % 3) * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="group cursor-none"
+            >
+              <div className="aspect-[3/4] bg-[#F9F8F6] overflow-hidden relative border border-black/5 shadow-xl group-hover:shadow-2xl transition-all duration-700">
+                <img src={product.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[4s] ease-out" alt={product.title} />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-700 flex items-center justify-center">
+                   <button 
+                      onClick={() => onSelectProduct(product)}
+                      className="px-8 py-3 bg-white text-black font-sans text-[9px] uppercase tracking-[0.4em] opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-700 hover:bg-[#C5A059]"
+                    >
+                       View Details & Add to Cart
+                    </button>
+                </div>
+                <div className="absolute top-6 left-6 font-mono text-[9px] uppercase tracking-[0.4em] text-black/20">EDITION.LIBRE</div>
               </div>
-              <div className="absolute top-6 left-6 font-mono text-[9px] uppercase tracking-[0.4em] text-black/20">EDITION.LIBRE</div>
-            </div>
-            <div className="mt-8 flex justify-between items-end">
-              <div className="space-y-1">
-                <p className="font-mono text-[9px] uppercase tracking-[0.4em] text-[#C5A059]">Ref. {product.id.slice(-6)}</p>
-                <h3 className="font-serif text-2xl text-black tracking-tight uppercase leading-none">{product.title}</h3>
-              </div>
-              <div className="text-right">
-                <p className="font-mono text-xs tracking-[0.2em] text-[#8B5E3C] font-bold">${Number(product.price).toLocaleString()}</p>
-                <div className="flex items-center gap-2 justify-end mt-2">
-                   <div className="w-2 h-px bg-black/20" />
-                   <p className="font-mono text-[8px] uppercase tracking-widest text-black/30">Secured Archive</p>
+              <div className="mt-8 flex justify-between items-end">
+                <div className="space-y-1">
+                  <p className="font-mono text-[9px] uppercase tracking-[0.4em] text-[#C5A059]">Ref. {product.id.slice(-6)}</p>
+                  <h3 className="font-serif text-2xl text-black tracking-tight uppercase leading-none">{product.title}</h3>
+                </div>
+                <div className="text-right">
+                  <p className="font-mono text-xs tracking-[0.2em] text-[#8B5E3C] font-bold">${Number(product.price).toLocaleString()}</p>
+                  <div className="flex items-center gap-2 justify-end mt-2">
+                     <div className="w-2 h-px bg-black/20" />
+                     <p className="font-mono text-[8px] uppercase tracking-widest text-black/30">Secured Archive</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          </motion.div>
-        ))}
+            </motion.div>
+          ))
+        )}
       </div>
 
 
