@@ -45,7 +45,7 @@ export const ShopView: React.FC<ShopViewProps> = ({ products, repoStatus, onSele
                     onClick={() => onSelectProduct(product)}
                     className="px-8 py-3 bg-white text-black font-sans text-[9px] uppercase tracking-[0.4em] opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-700 hover:bg-[#C5A059]"
                   >
-                     View Details
+                     View Details & Add to Cart
                   </button>
               </div>
               <div className="absolute top-6 left-6 font-mono text-[9px] uppercase tracking-[0.4em] text-black/20">EDITION.LIBRE</div>

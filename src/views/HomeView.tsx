@@ -25,7 +25,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
       {HERO_SLIDES.map((slide, i) => (
         <motion.div
           key={i}
-          className="absolute inset-0 z-0"
+          className={`absolute inset-0 z-0 ${i !== 0 ? 'hidden md:block' : ''}`}
           initial={{ opacity: 0, scale: 1.08 }}
           animate={{ 
             opacity: i === heroIndex ? 1 : 0,
@@ -49,7 +49,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
           className="mb-12"
         >
           <span className="font-mono text-[10px] md:text-xs font-bold uppercase tracking-[0.8em] text-white/90 drop-shadow-md block">
-            Akasis Gallery Presents
+            AKASI PRESENTS
           </span>
         </motion.div>
 
@@ -176,56 +176,55 @@ export const HomeView: React.FC<HomeViewProps> = ({
     {/* SECTION 3: MASTERPIECES */}
     <section id="masterpieces" className="bg-[#F9F8F6] py-16 md:py-32 px-8 md:px-24">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-16 md:mb-24 flex flex-col md:flex-row justify-between items-end gap-8 md:gap-12">
+        <div className="mb-16 md:mb-24 flex flex-col items-center text-center gap-6">
           <div className="space-y-4">
-            <span className="font-mono text-[10px] uppercase tracking-[0.8em] text-[#C5A059]">Selected Works</span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.8em] text-[#C5A059] block">Selected Works</span>
             <h2 className="font-serif text-6xl md:text-8xl tracking-tighter text-black leading-none uppercase font-light">The Shop.</h2>
           </div>
-          <p className="font-sans text-sm md:text-base text-black/60 max-w-sm leading-loose">
+          <p className="font-sans text-sm md:text-base text-black/60 max-w-md leading-loose">
             A permanent exploration of identity through mixed media, gold leaf, and high-fidelity textures.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-24">
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-8 pb-12 scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           {MASTERPIECES.map((art, i) => (
             <motion.div 
               key={i} 
-              initial={{ opacity: 0, y: 80 }} 
-              whileInView={{ opacity: 1, y: 0 }} 
+              initial={{ opacity: 0, x: 80 }} 
+              whileInView={{ opacity: 1, x: 0 }} 
               viewport={{ once: true }} 
               transition={{ duration: 1.2, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }} 
               onMouseEnter={() => setHoveredId(i)}
               onMouseLeave={() => setHoveredId(null)}
-              className="group relative cursor-none"
+              className="group relative cursor-none flex-none w-[85vw] md:w-[450px] snap-center"
             >
-              <div className="relative aspect-[4/5] overflow-hidden bg-stone-200 shadow-2xl border border-black/5">
+              <div className="relative aspect-[4/5] overflow-hidden bg-stone-200 shadow-xl border border-black/5">
                 <img src={art.img} className="w-full h-full object-cover transition-transform duration-[4s] ease-out group-hover:scale-110" alt={art.title} />
-                <PrivateViewOverlay 
-                  title={art.title} 
-                  medium={art.medium} 
-                  dim={art.dim} 
-                  price={art.price} 
-                  isHovered={hoveredId === i} 
-                  onAcquire={() => openCheckout(art)}
-                />
+                <div className="absolute inset-0 bg-black/0 md:group-hover:bg-black/40 transition-all duration-700 flex items-center justify-center">
+                   <button 
+                      onClick={() => navigateTo('shop')}
+                      className="px-8 py-3 bg-white text-black font-sans text-[9px] uppercase tracking-[0.4em] md:opacity-0 md:group-hover:opacity-100 md:translate-y-4 md:group-hover:translate-y-0 transition-all duration-700 hover:bg-[#C5A059] absolute bottom-8 md:static shadow-xl md:shadow-none"
+                    >
+                       View Details & Shop
+                    </button>
+                </div>
               </div>
               <div className="mt-8 flex justify-between items-end">
-                <div className="space-y-1">
+                <div className="space-y-1 text-left">
                   <h3 className="font-serif text-2xl text-black tracking-tight uppercase leading-none">{art.title}</h3>
                   <p className="font-mono text-[10px] uppercase tracking-widest text-black/30">{art.year}</p>
                 </div>
-                <p className="font-mono text-xs tracking-[0.2em] text-[#8B5E3C] font-bold">{art.price}</p>
               </div>
             </motion.div>
           ))}
         </div>
 
-        <div className="mt-16 flex justify-end">
+        <div className="mt-8 md:mt-16 flex justify-center">
           <button 
             onClick={() => navigateTo('shop')}
             className="flex items-center gap-4 text-black hover:text-[#C5A059] transition-colors group cursor-none"
           >
-            <span className="font-sans text-[10px] uppercase tracking-[0.4em]">View All Works</span>
+            <span className="font-sans text-[10px] uppercase tracking-[0.4em]">View The Repository</span>
             <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
           </button>
         </div>
@@ -238,44 +237,36 @@ export const HomeView: React.FC<HomeViewProps> = ({
           <img src={IMAGES.masterpiece3} className="w-full h-full object-cover" alt="Background" />
        </div>
        <div className="max-w-7xl mx-auto px-8 md:px-24 relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-24 items-center">
-             <div className="md:col-span-4 space-y-12">
-                <span className="font-mono text-[10px] uppercase tracking-[0.8em] text-[#8B5E3C]">Curated Sets</span>
+          <div className="flex flex-col items-center text-center mb-16 md:mb-24 gap-6">
+             <div className="space-y-4">
+                <span className="font-mono text-[10px] uppercase tracking-[0.8em] text-[#8B5E3C] block">Curated Sets</span>
                 <h2 className="font-serif text-6xl md:text-8xl tracking-tighter italic leading-none text-black">The Series.</h2>
-                <p className="font-sans text-sm md:text-base text-black/60 leading-loose">
-                   Each series is a deep dive into a specific narrative arc, authored over months of studio seclusion.
-                </p>
-                <div className="pt-8 border-t border-black/10 flex gap-8">
-                   <div className="space-y-2">
-                      <p className="font-serif text-4xl italic text-[#8B5E3C]">3</p>
-                      <p className="font-mono text-[8px] uppercase tracking-widest text-black/30">Active Series</p>
-                   </div>
-                   <div className="space-y-2">
-                      <p className="font-serif text-4xl italic text-[#8B5E3C]">35</p>
-                      <p className="font-mono text-[8px] uppercase tracking-widest text-black/30">Directives</p>
-                   </div>
-                </div>
              </div>
+             <p className="font-sans text-sm md:text-base text-black/60 leading-loose max-w-md">
+                Each series is a deep dive into a specific narrative arc, authored over months of studio seclusion.
+             </p>
+          </div>
              
-             <div className="md:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-12">
-                {COLLECTIONS.map((col, i) => (
-                  <motion.div 
-                    key={i} 
-                    initial={{ opacity: 0, x: 80 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1.2, delay: i * 0.2, ease: [0.16, 1, 0.3, 1] }}
-                    className="group cursor-none"
-                  >
-                    <div className="aspect-[2/3] overflow-hidden mb-8 border border-black/5 shadow-2xl relative">
-                       <img src={col.img} className="w-full h-full object-cover group-hover:scale-110 transition-all duration-1000" alt={col.title} />
-                       <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-all duration-700" />
-                    </div>
-                    <span className="font-mono text-[9px] text-[#8B5E3C] tracking-widest">{col.id}</span>
+          <div className="flex overflow-x-auto md:grid md:grid-cols-3 snap-x snap-mandatory gap-8 md:gap-12 pb-8 scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+             {COLLECTIONS.map((col, i) => (
+               <motion.div 
+                 key={i} 
+                 initial={{ opacity: 0, x: 80 }}
+                 whileInView={{ opacity: 1, x: 0 }}
+                 viewport={{ once: true }}
+                 transition={{ duration: 1.2, delay: i * 0.2, ease: [0.16, 1, 0.3, 1] }}
+                 className="group cursor-none flex-none w-[85vw] md:w-auto snap-center"
+               >
+                 <div className="aspect-[2/3] overflow-hidden mb-8 border border-black/5 shadow-2xl relative">
+                    <img src={col.img} className="w-full h-full object-cover group-hover:scale-110 transition-all duration-1000" alt={col.title} />
+                    <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-all duration-700" />
+                 </div>
+                 <div className="text-left md:text-center">
+                    <span className="font-mono text-[9px] text-[#8B5E3C] tracking-widest block">{col.id}</span>
                     <h3 className="font-serif text-2xl mt-2 italic group-hover:text-[#8B5E3C] transition-colors">{col.title}</h3>
-                  </motion.div>
-                ))}
-             </div>
+                 </div>
+               </motion.div>
+             ))}
           </div>
        </div>
     </section>
@@ -317,18 +308,18 @@ export const HomeView: React.FC<HomeViewProps> = ({
     {/* SECTION 6: THE PRIVATE VIEW */}
     <section id="private" className="bg-[#F9F8F6] py-16 md:py-32 px-8 md:px-24 overflow-hidden border-t border-black/5">
        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 md:mb-24 gap-8 md:gap-12">
+          <div className="flex flex-col items-center text-center mb-16 md:mb-24 gap-6">
              <div className="space-y-4">
-                <span className="font-mono text-[10px] uppercase tracking-[0.8em] text-[#C5A059]">The Concierge</span>
-                <h2 className="font-serif text-6xl md:text-8xl tracking-tighter text-black leading-none italic font-light">Exclusive <br/> Access.</h2>
+                <span className="font-mono text-[10px] uppercase tracking-[0.8em] text-[#C5A059] block">The Concierge</span>
+                <h2 className="font-serif text-6xl md:text-8xl tracking-tighter text-black leading-none italic font-light">Exclusive <br className="hidden md:block" /> Access.</h2>
              </div>
-             <p className="font-sans text-sm md:text-base text-black/60 max-w-sm leading-loose">
+             <p className="font-sans text-sm md:text-base text-black/60 max-w-md leading-loose">
                 Collectors within our circle gain access to private directives and archival sketches.
              </p>
           </div>
 
-          {/* Desktop: Elastic Carousel | Mobile: Stacked */}
-          <div className="flex flex-col md:flex-row h-auto md:h-[650px] gap-4 mb-16 md:mb-24 overflow-hidden">
+          {/* Desktop: Elastic Carousel | Mobile: Horizontal Swipe Carousel */}
+          <div className="flex overflow-x-auto snap-x snap-mandatory md:overflow-hidden md:flex-row h-auto md:h-[650px] gap-4 mb-16 md:mb-24 scrollbar-hide pb-8 md:pb-0" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
              {EXPERIMENTAL_GALLERY.slice(0, 3).map((img, i) => {
                const isActive = activeAccordion === i;
                return (
@@ -339,15 +330,15 @@ export const HomeView: React.FC<HomeViewProps> = ({
                    viewport={{ once: true }}
                    transition={{ duration: 1.2, delay: i * 0.2, ease: [0.16, 1, 0.3, 1] }}
                    onMouseEnter={() => setActiveAccordion(i)}
-                   className={`relative group overflow-hidden border border-black/5 shadow-2xl bg-[#0a0a0a] transition-all duration-700 ease-[0.16,1,0.3,1] ${
+                   className={`relative group overflow-hidden border border-black/5 shadow-xl md:shadow-2xl bg-[#0a0a0a] transition-all duration-700 ease-[0.16,1,0.3,1] ${
                      isActive ? 'md:flex-[6]' : 'md:flex-[1]'
-                   } aspect-[4/5] md:aspect-auto w-full cursor-none`}
+                   } aspect-[4/5] md:aspect-auto flex-none w-[85vw] md:w-auto snap-center cursor-none`}
                  >
-                   <img src={img} className={`w-full h-full object-cover transition-all duration-1000 ease-out group-hover:scale-105 ${!isActive && 'opacity-60 grayscale'}`} alt="Private Archive" />
+                   <img src={img} className={`w-full h-full object-cover transition-all duration-1000 ease-out group-hover:scale-105 ${!isActive && 'md:opacity-60 md:grayscale'}`} alt="Private Archive" />
                    
                    <div className={`absolute inset-0 transition-all duration-700 flex flex-col justify-end p-8 ${isActive ? 'bg-gradient-to-t from-black/90 via-black/20 to-transparent' : 'bg-black/40'}`}>
                       <AnimatePresence>
-                         {isActive && (
+                         {(isActive || window.innerWidth < 768) && (
                            <motion.div 
                              initial={{ opacity: 0, y: 20 }}
                              animate={{ opacity: 1, y: 0 }}
