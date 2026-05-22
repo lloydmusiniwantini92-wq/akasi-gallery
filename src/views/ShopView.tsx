@@ -67,22 +67,7 @@ export const ShopView: React.FC<ShopViewProps> = ({ products, repoStatus, onSele
         ))}
       </div>
 
-      {/* COMMISSION CTA */}
-      <div className="mt-24 bg-[#D9D2C5] py-24 md:py-32 px-12 md:px-24 text-center relative overflow-hidden border-t border-black/5">
-         <div className="absolute inset-0 opacity-5 grayscale brightness-110">
-            <img src={IMAGES.studio1} className="w-full h-full object-cover" alt="Studio" />
-         </div>
-         <div className="relative z-10 space-y-12">
-            <span className="font-mono text-[10px] uppercase tracking-[1em] text-[#8B5E3C]">Custom Directives</span>
-            <h2 className="font-serif text-5xl md:text-7xl text-black tracking-tighter uppercase font-light">Commission a Narrative.</h2>
-            <p className="font-sans text-sm text-black/60 max-w-xl mx-auto leading-loose">
-               Collaborate directly with Akasi Osei to author a bespoke directive that captures your personal ancestral arc.
-            </p>
-            <button className="px-16 py-6 bg-black text-white font-sans text-[10px] uppercase tracking-[0.4em] hover:bg-[#8B5E3C] transition-all duration-700 cursor-none">
-               Request Consultation
-            </button>
-         </div>
-      </div>
+
     </div>
   </motion.div>
 );
