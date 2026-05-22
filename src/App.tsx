@@ -4,6 +4,7 @@ import { IMAGES, HERO_SLIDES, ABOUT_IMAGES } from './constants/assets';
 import { CustomCursor, Splashscreen } from './components/CoreUI';
 import { Navbar, MenuOverlay } from './components/Navigation';
 import { Footer } from './components/Footer';
+import { Exhibitions } from './components/Exhibitions';
 import { CheckoutModal } from './components/Checkout';
 import { ProductDetail } from './components/ProductDetail';
 import { Cart } from './components/Cart';
@@ -317,6 +318,7 @@ export default function App() {
         </motion.div>
       </AnimatePresence>
 
+      <Exhibitions />
       <Footer navigateTo={navigateTo} />
 
       <Cart 
