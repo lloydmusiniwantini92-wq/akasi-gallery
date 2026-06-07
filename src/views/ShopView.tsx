@@ -21,11 +21,11 @@ export const ShopView: React.FC<ShopViewProps> = ({ products, repoStatus, onSele
         <div className="space-y-4">
           <EditorialReveal delay={0.1}>
             <div className="flex items-center gap-4 mb-4">
-              <span className="font-mono text-[9px] uppercase tracking-[0.5em] text-[#C5A059]">Viewing Room</span>
+              <span className="font-mono text-[9px] uppercase tracking-[0.5em] text-[#C5A059]">SHOP</span>
             </div>
           </EditorialReveal>
           <EditorialReveal delay={0.2}>
-            <h1 className="font-serif text-6xl md:text-9xl tracking-tighter text-black leading-none italic">The Repository.</h1>
+            <h1 className="font-serif text-6xl md:text-9xl tracking-tighter text-black leading-none italic">SHOP.</h1>
           </EditorialReveal>
         </div>
         <EditorialReveal delay={0.3}>

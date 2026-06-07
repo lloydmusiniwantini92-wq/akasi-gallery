@@ -65,7 +65,7 @@ export const Navbar: React.FC<NavbarProps> = ({ scrolled, view, isMenuOpen, setI
           onClick={() => navigateTo('shop')}
           className={`font-sans text-[10px] uppercase tracking-[0.4em] transition-all duration-700 cursor-none ${textClass}`}
         >
-          Viewing Room
+          SHOP
         </button>
         <button 
           onClick={() => navigateTo('about')}
@@ -73,12 +73,7 @@ export const Navbar: React.FC<NavbarProps> = ({ scrolled, view, isMenuOpen, setI
         >
           Narrative
         </button>
-        <button 
-          onClick={() => navigateTo('home', 'exhibitions')}
-          className={`font-sans text-[10px] uppercase tracking-[0.4em] transition-all duration-700 cursor-none ${textClass}`}
-        >
-          Presence
-        </button>
+
       </div>
 
       {/* Right: Actions */}

@@ -6,6 +6,12 @@ import { MASTERPIECES, COLLECTIONS, EXHIBITIONS, HERO_SEQUENCE } from '../data/g
 import { PrivateViewOverlay } from '../components/PrivateViewOverlay';
 import { EditorialReveal } from '../components/EditorialReveal';
 
+const MANIFESTO_QUOTES = [
+  <>I want to give my family and community <span className="text-[#8B5E3C]">something to see.</span></>,
+  <><span className="text-[#8B5E3C]">More than decorations</span> - it's designed to be felt.</>,
+  <>Not here to blend in, and <span className="text-[#8B5E3C]">neither are you.</span></>
+];
+
 interface HomeViewProps {
   heroIndex: number;
   hoveredId: number | null;
@@ -19,6 +25,15 @@ export const HomeView: React.FC<HomeViewProps> = ({
 }) => {
   const [activeAccordion, setActiveAccordion] = useState<number>(1);
   const [activeCarouselIndex, setActiveCarouselIndex] = useState<number>(2);
+  const [quoteIndex, setQuoteIndex] = useState<number>(0);
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setQuoteIndex((prev) => (prev + 1) % MANIFESTO_QUOTES.length);
+    }, 4500);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
   <>
     {/* SECTION 1: HERO */}
@@ -112,14 +127,11 @@ export const HomeView: React.FC<HomeViewProps> = ({
           const section = document.getElementById('masterpieces');
           section?.scrollIntoView({ behavior: 'auto' });
         }}
-        className="absolute bottom-20 right-6 md:bottom-24 md:right-24 z-30 group flex items-center gap-6 cursor-none"
+        className="absolute bottom-12 right-4 md:bottom-12 md:right-12 z-30 group flex items-center gap-5 cursor-none bg-[#C5A059] hover:bg-white px-8 py-5 rounded-full shadow-[0_10px_30px_rgba(197,160,89,0.4)] hover:shadow-[0_10px_40px_rgba(255,255,255,0.5)] hover:-translate-y-1 transition-all duration-500 border border-black/10"
       >
-        <div className="flex flex-col items-end drop-shadow-md">
-          <span className="font-mono text-[9px] uppercase tracking-[0.5em] text-white md:text-[#C5A059] font-bold md:font-normal group-hover:text-white transition-colors duration-700 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">Begin Narrative</span>
-          <div className="w-16 h-px bg-white/60 md:bg-[#C5A059]/20 group-hover:bg-white group-hover:w-32 transition-all duration-1000 mt-3 shadow-lg" />
-        </div>
-        <div className="w-14 h-14 rounded-full border border-white/40 md:border-[#C5A059]/20 bg-black/20 flex items-center justify-center group-hover:border-white group-hover:bg-white transition-all duration-700 backdrop-blur-md shadow-xl">
-          <ArrowRight size={16} className="text-white md:text-[#C5A059] group-hover:text-black group-hover:translate-x-1 transition-all duration-700" />
+        <span className="font-mono text-[10px] md:text-[11px] uppercase tracking-[0.5em] text-black font-bold mt-[2px]">Begin Narrative</span>
+        <div className="w-8 h-8 rounded-full bg-black/10 flex items-center justify-center group-hover:bg-black/5 transition-colors">
+          <ArrowRight size={16} className="text-black group-hover:translate-x-1 transition-transform duration-500" />
         </div>
       </motion.button>
     </section>
@@ -151,9 +163,24 @@ export const HomeView: React.FC<HomeViewProps> = ({
           <span className="font-mono text-[10px] uppercase tracking-[0.8em] text-[#8B5E3C] mb-8 block">The Manifesto</span>
         </EditorialReveal>
         <EditorialReveal delay={0.2}>
-          <h2 className="font-serif text-5xl md:text-7xl lg:text-8xl leading-[1] tracking-tighter text-black mb-16 italic">
-            "I want my art to feel like a <span className="text-[#8B5E3C]">held breath.</span>"
-          </h2>
+          <div className="grid grid-cols-1 grid-rows-1 mb-16 relative">
+            <AnimatePresence>
+              <motion.h2 
+                key={quoteIndex}
+                initial={{ opacity: 0, filter: 'blur(12px)' }}
+                animate={{ opacity: 1, filter: 'blur(0px)' }}
+                exit={{ opacity: 0, filter: 'blur(12px)' }}
+                transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+                className="col-start-1 row-start-1 font-serif text-5xl md:text-7xl lg:text-8xl leading-[1] tracking-tighter text-black italic"
+              >
+                "{MANIFESTO_QUOTES[quoteIndex] || MANIFESTO_QUOTES[0]}"
+              </motion.h2>
+            </AnimatePresence>
+            {/* Invisible placeholder to prevent layout shift, sized by the longest quote */}
+            <h2 className="col-start-1 row-start-1 font-serif text-5xl md:text-7xl lg:text-8xl leading-[1] tracking-tighter text-black italic invisible pointer-events-none">
+              "I want to give my family and community something to see."
+            </h2>
+          </div>
         </EditorialReveal>
         
         <div className="space-y-12 pl-12 border-l border-black/10">
@@ -251,13 +278,13 @@ export const HomeView: React.FC<HomeViewProps> = ({
           ))}
         </motion.div>
 
-        <div className="mt-8 md:mt-16 flex justify-center">
+        <div className="mt-12 md:mt-24 flex justify-center">
           <button 
             onClick={() => navigateTo('shop')}
-            className="flex items-center gap-4 text-black hover:text-[#C5A059] transition-colors group cursor-none"
+            className="flex items-center gap-6 text-black hover:text-[#C5A059] transition-colors group cursor-none"
           >
-            <span className="font-sans text-[10px] uppercase tracking-[0.4em]">View The Repository</span>
-            <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
+            <span className="font-sans text-xs md:text-sm uppercase tracking-[0.5em] font-semibold">VIEW THE SHOP</span>
+            <ArrowRight size={24} className="group-hover:translate-x-3 transition-transform duration-500" />
           </button>
         </div>
       </div>

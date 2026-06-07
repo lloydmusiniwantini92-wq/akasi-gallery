@@ -14,7 +14,7 @@ import { AboutView } from './views/AboutView';
 
 const NAV_ITEMS = [
   { label: "Archive", view: 'home', section: 'masterpieces', img: IMAGES.masterpiece1 },
-  { label: "Viewing Room", view: 'shop', section: 'shop', img: IMAGES.masterpiece2 },
+  { label: "SHOP", view: 'shop', section: 'shop', img: IMAGES.masterpiece2 },
   { label: "Narrative", view: 'about', section: 'about', img: ABOUT_IMAGES.hero },
   { label: "Exhibitions", view: 'home', section: 'exhibitions', img: IMAGES.studio2 },
 ];
