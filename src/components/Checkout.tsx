@@ -167,6 +167,7 @@ const CheckoutForm = ({ cartItems, form, setForm, onSubmit, setCheckoutStep, isS
   const stripe = useStripe();
   const elements = useElements();
   const [errorMessage, setErrorMessage] = useState('');
+  const [isProcessingLocal, setIsProcessingLocal] = useState(false);
 
   const handleProceed = async () => {
     if (
@@ -183,16 +184,19 @@ const CheckoutForm = ({ cartItems, form, setForm, onSubmit, setCheckoutStep, isS
       return;
     }
 
-    setCheckoutStep('processing');
+    setIsProcessingLocal(true);
 
     if (!isSimulated) {
-      if (!stripe || !elements) return;
+      if (!stripe || !elements) {
+         setIsProcessingLocal(false);
+         return;
+      }
 
       // Ensure elements validates the input before confirming
       const { error: submitError } = await elements.submit();
       if (submitError) {
         setErrorMessage(submitError.message || "Please check your payment details.");
-        setCheckoutStep('form');
+        setIsProcessingLocal(false);
         return;
       }
 
@@ -206,7 +210,7 @@ const CheckoutForm = ({ cartItems, form, setForm, onSubmit, setCheckoutStep, isS
 
       if (error) {
         setErrorMessage(error.message || "Payment failed.");
-        setCheckoutStep('form');
+        setIsProcessingLocal(false);
         return;
       }
     } else {
@@ -214,7 +218,10 @@ const CheckoutForm = ({ cartItems, form, setForm, onSubmit, setCheckoutStep, isS
       await new Promise(resolve => setTimeout(resolve, 2000));
     }
 
-    // Payment Successful (or simulated)! Build Printify payload
+    // Payment Successful! Now we can safely change the global step which unmounts the form
+    setCheckoutStep('processing');
+
+    // Build Printify payload
     const nameParts = form.name.trim().split(/\s+/);
     const firstName = nameParts[0] || '';
     const lastName = nameParts.slice(1).join(' ') || 'Collector';
@@ -379,11 +386,15 @@ const CheckoutForm = ({ cartItems, form, setForm, onSubmit, setCheckoutStep, isS
 
       <button 
         onClick={handleProceed}
-        disabled={!stripe && !isSimulated}
+        disabled={(!stripe && !isSimulated) || isProcessingLocal}
         className="w-full py-6 bg-black text-white font-sans text-[10px] uppercase tracking-[0.4em] hover:bg-[#C5A059] transition-all duration-700 disabled:opacity-30 flex items-center justify-center gap-6 group cursor-none mt-8"
       >
-        Proceed to Securing Work
-        <ArrowRight size={14} className="group-hover:translate-x-2 transition-transform" />
+        {isProcessingLocal ? 'Processing...' : (
+          <>
+            Proceed to Securing Work
+            <ArrowRight size={14} className="group-hover:translate-x-2 transition-transform" />
+          </>
+        )}
       </button>
     </div>
   );
