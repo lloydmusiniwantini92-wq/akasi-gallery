@@ -76,7 +76,7 @@ export const Footer: React.FC<FooterProps> = ({ navigateTo }) => (
     </div>
     
     <div className="max-w-7xl mx-auto mt-32 md:mt-48 pt-12 border-t border-black/5 flex flex-col md:flex-row justify-between items-center gap-12 relative z-10">
-      <p className="font-mono text-[9px] uppercase tracking-[0.5em] text-black/50 text-center md:text-left leading-relaxed">
+      <p className="font-mono text-[9px] uppercase tracking-widest md:tracking-[0.5em] text-black/50 text-center md:text-left leading-relaxed">
         © 2026 Akasis Gallery.<br className="md:hidden" /> All Narrative Rights Reserved.
       </p>
       <div className="flex flex-col md:flex-row gap-6 md:gap-12 items-center text-center">
