@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Check, Mail, Globe, ArrowRight } from 'lucide-react';
+import { Check, Mail, Globe, ArrowRight, ArrowLeft } from 'lucide-react';
 import { IMAGES } from '../constants/assets';
 import { EditorialReveal } from '../components/EditorialReveal';
 
@@ -17,13 +17,8 @@ export const ShopView: React.FC<ShopViewProps> = ({ products, repoStatus, onSele
     className="bg-[#D9D2C5] min-h-screen pt-24 pb-24 px-8 md:px-24"
   >
     <div className="max-w-7xl mx-auto">
-      <div className="mb-24 flex flex-col md:flex-row justify-between items-end gap-12">
+      <div className="mb-16 md:mb-24 flex flex-col items-center text-center md:flex-row md:justify-between md:items-end md:text-left gap-8 md:gap-12">
         <div className="space-y-4">
-          <EditorialReveal delay={0.1}>
-            <div className="flex items-center gap-4 mb-4">
-              <span className="font-mono text-[9px] uppercase tracking-[0.5em] text-[#C5A059]">SHOP</span>
-            </div>
-          </EditorialReveal>
           <EditorialReveal delay={0.2}>
             <h1 className="font-serif text-6xl md:text-9xl tracking-tighter text-black leading-none italic">SHOP.</h1>
           </EditorialReveal>
@@ -33,6 +28,12 @@ export const ShopView: React.FC<ShopViewProps> = ({ products, repoStatus, onSele
             Authorized limited editions and unique physical directives, available for secure acquisition into private archives.
           </p>
         </EditorialReveal>
+      </div>
+
+      <div className="md:hidden flex items-center justify-center gap-4 mb-8 text-[#8B5E3C] opacity-70">
+        <ArrowLeft size={16} />
+        <span className="font-mono text-[10px] uppercase tracking-[0.4em]">Swipe</span>
+        <ArrowRight size={16} />
       </div>
 
       <div 
@@ -57,10 +58,10 @@ export const ShopView: React.FC<ShopViewProps> = ({ products, repoStatus, onSele
             >
               <div className="aspect-[3/4] bg-[#F9F8F6] overflow-hidden relative border border-black/5 shadow-xl group-hover:shadow-2xl transition-all duration-700">
                 <img src={product.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[4s] ease-out" alt={product.title} />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-700 flex items-center justify-center">
+                <div className="absolute inset-0 bg-black/10 md:bg-black/0 md:group-hover:bg-black/40 transition-all duration-700 flex items-center justify-center pointer-events-none md:pointer-events-auto group-hover:pointer-events-auto">
                    <button 
                       onClick={() => onSelectProduct(product)}
-                      className="px-8 py-3 bg-white text-black font-sans text-[9px] uppercase tracking-[0.4em] opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-700 hover:bg-[#C5A059]"
+                      className="pointer-events-auto px-8 py-3 bg-white text-black font-sans text-[9px] uppercase tracking-[0.4em] opacity-100 translate-y-0 md:opacity-0 md:group-hover:opacity-100 md:translate-y-4 md:group-hover:translate-y-0 transition-all duration-700 hover:bg-[#C5A059]"
                     >
                        View Details & Add to Cart
                     </button>
