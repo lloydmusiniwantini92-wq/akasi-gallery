@@ -133,15 +133,15 @@ export const HomeView: React.FC<HomeViewProps> = ({
         </motion.p>
       </div>
 
-      <div className="absolute bottom-12 w-full flex justify-center md:w-auto md:right-12 z-30 pointer-events-none">
+      <div className="absolute bottom-24 md:bottom-12 w-full flex justify-center md:w-auto md:right-12 z-30 pointer-events-none">
         <motion.button 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5, delay: 2, ease: [0.16, 1, 0.3, 1] }}
           onClick={() => navigateTo('shop')}
-          className="pointer-events-auto group cursor-none bg-[#C5A059] hover:bg-white px-10 py-5 md:px-12 md:py-6 rounded-full shadow-[0_10px_30px_rgba(197,160,89,0.4)] hover:shadow-[0_10px_40px_rgba(255,255,255,0.5)] hover:-translate-y-1 transition-all duration-500 border border-black/10"
+          className="pointer-events-auto group cursor-none bg-[#C5A059] hover:bg-white px-8 py-4 md:px-12 md:py-6 rounded-full shadow-[0_10px_30px_rgba(197,160,89,0.4)] hover:shadow-[0_10px_40px_rgba(255,255,255,0.5)] hover:-translate-y-1 transition-all duration-500 border border-black/10"
         >
-          <span className="font-mono text-[20px] md:text-[22px] uppercase tracking-[0.3em] text-white group-hover:text-black transition-colors font-bold pl-[0.3em]">Shop Now</span>
+          <span className="font-mono text-[16px] md:text-[22px] uppercase tracking-[0.3em] text-white group-hover:text-black transition-colors font-bold pl-[0.3em]">Shop Now</span>
         </motion.button>
       </div>
     </section>
