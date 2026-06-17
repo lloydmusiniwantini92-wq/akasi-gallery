@@ -37,7 +37,7 @@ export const AboutView: React.FC<AboutViewProps> = ({ navigateTo }) => {
           <img src={ABOUT_IMAGES.hero} className="w-full h-full object-cover object-[50%_30%] brightness-[0.85] group-hover:brightness-100 transition-all duration-[2s] ease-out" alt="Akasi Osei" />
           <div className="absolute inset-0 bg-black/5 z-10 pointer-events-none" />
         </div>
-        <div className="relative z-20 px-4 md:px-12 pb-12 md:pb-24 w-full flex flex-col items-center justify-end h-full">
+        <div className="relative z-20 px-4 md:px-12 pb-24 md:pb-24 w-full flex flex-col items-center justify-end h-full">
           <motion.span 
             initial={{ opacity: 0, y: 20 }} 
             whileInView={{ opacity: 1, y: 0 }} 
