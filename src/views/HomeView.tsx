@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Check, Mail, Globe, ArrowRight, ArrowLeft, Instagram, Linkedin, Twitter, X } from 'lucide-react';
 import { IMAGES, HERO_SLIDES, ABOUT_IMAGES, EXPERIMENTAL_GALLERY } from '../constants/assets';
@@ -28,6 +28,18 @@ export const HomeView: React.FC<HomeViewProps> = ({
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [activeCarouselIndex, setActiveCarouselIndex] = useState<number>(2);
   const [quoteIndex, setQuoteIndex] = useState<number>(0);
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (selectedImage) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedImage]);
 
   React.useEffect(() => {
     const interval = setInterval(() => {
