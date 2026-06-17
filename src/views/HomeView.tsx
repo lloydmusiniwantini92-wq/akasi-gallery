@@ -18,10 +18,11 @@ interface HomeViewProps {
   setHoveredId: (id: number | null) => void;
   openCheckout: (item: any) => void;
   navigateTo: (view: string, section?: string) => void;
+  products: any[];
 }
 
 export const HomeView: React.FC<HomeViewProps> = ({ 
-  heroIndex, hoveredId, setHoveredId, openCheckout, navigateTo 
+  heroIndex, hoveredId, setHoveredId, openCheckout, navigateTo, products 
 }) => {
   const [activeAccordion, setActiveAccordion] = useState<number>(1);
   const [activeCarouselIndex, setActiveCarouselIndex] = useState<number>(2);
@@ -69,7 +70,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-12"
+          className="absolute top-48 md:relative md:top-auto md:mb-12"
         >
           <span className="font-mono text-[10px] md:text-xs font-bold uppercase tracking-[0.8em] text-white/90 drop-shadow-md block">
             AKASI PRESENTS
@@ -119,21 +120,17 @@ export const HomeView: React.FC<HomeViewProps> = ({
         </motion.p>
       </div>
 
-      <motion.button 
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1.5, delay: 2, ease: [0.16, 1, 0.3, 1] }}
-        onClick={() => {
-          const section = document.getElementById('masterpieces');
-          section?.scrollIntoView({ behavior: 'auto' });
-        }}
-        className="absolute bottom-12 right-4 md:bottom-12 md:right-12 z-30 group flex items-center gap-5 cursor-none bg-[#C5A059] hover:bg-white px-8 py-5 rounded-full shadow-[0_10px_30px_rgba(197,160,89,0.4)] hover:shadow-[0_10px_40px_rgba(255,255,255,0.5)] hover:-translate-y-1 transition-all duration-500 border border-black/10"
-      >
-        <span className="font-mono text-[10px] md:text-[11px] uppercase tracking-[0.5em] text-black font-bold mt-[2px]">Begin Narrative</span>
-        <div className="w-8 h-8 rounded-full bg-black/10 flex items-center justify-center group-hover:bg-black/5 transition-colors">
-          <ArrowRight size={16} className="text-black group-hover:translate-x-1 transition-transform duration-500" />
-        </div>
-      </motion.button>
+      <div className="absolute bottom-12 w-full flex justify-center md:w-auto md:right-12 z-30 pointer-events-none">
+        <motion.button 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.5, delay: 2, ease: [0.16, 1, 0.3, 1] }}
+          onClick={() => navigateTo('shop')}
+          className="pointer-events-auto group cursor-none bg-[#C5A059] hover:bg-white px-10 py-5 md:px-12 md:py-6 rounded-full shadow-[0_10px_30px_rgba(197,160,89,0.4)] hover:shadow-[0_10px_40px_rgba(255,255,255,0.5)] hover:-translate-y-1 transition-all duration-500 border border-black/10"
+        >
+          <span className="font-mono text-[20px] md:text-[22px] uppercase tracking-[0.3em] text-white group-hover:text-black transition-colors font-bold pl-[0.3em]">Shop Now</span>
+        </motion.button>
+      </div>
     </section>
 
     {/* SECTION 2: THE VELVET MANIFESTO */}
@@ -200,12 +197,11 @@ export const HomeView: React.FC<HomeViewProps> = ({
           <div className="flex justify-center md:justify-start mt-16 md:ml-12 w-full">
             <button 
               onClick={() => navigateTo('about')}
-              className="group px-12 md:px-16 py-6 md:py-8 bg-[#8B5E3C] text-white hover:bg-black transition-colors duration-700 cursor-none inline-flex items-center gap-6 md:gap-8 shadow-xl"
+              className="group cursor-none bg-[#C5A059] hover:bg-white px-10 py-5 md:px-12 md:py-6 rounded-full shadow-[0_10px_30px_rgba(197,160,89,0.4)] hover:shadow-[0_10px_40px_rgba(255,255,255,0.5)] hover:-translate-y-1 transition-all duration-500 border border-black/10"
             >
-              <span className="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.5em]">
+              <span className="font-mono text-[20px] md:text-[22px] uppercase tracking-[0.3em] text-white group-hover:text-black transition-colors font-bold pl-[0.3em]">
                 The Full Narrative
               </span>
-              <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform duration-700" />
             </button>
           </div>
         </EditorialReveal>
@@ -250,41 +246,52 @@ export const HomeView: React.FC<HomeViewProps> = ({
           className="flex overflow-x-auto snap-x snap-mandatory gap-8 pb-12 scrollbar-hide" 
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
-          {MASTERPIECES.map((art, i) => (
+          {products.length === 0 ? (
+            <div className="w-full text-center py-24">
+              <p className="font-mono text-xs uppercase tracking-widest text-black/40 animate-pulse">
+                Synchronizing with Printify Archive...
+              </p>
+            </div>
+          ) : (
+          products.slice(0, 3).map((product, i) => (
             <div 
-              key={i} 
+              key={product.id || i} 
               onPointerEnter={(e) => { if (e.pointerType === 'mouse') setHoveredId(i); }}
               onPointerLeave={(e) => { if (e.pointerType === 'mouse') setHoveredId(null); }}
               className="group relative cursor-none flex-none w-[85vw] md:w-[450px] snap-center"
             >
-              <div className="relative aspect-[4/5] overflow-hidden bg-stone-200 shadow-xl border border-black/5">
-                <img src={art.img} className="w-full h-full object-cover transition-transform duration-[4s] ease-out md:group-hover:scale-110" alt={art.title} />
+              <div className="relative aspect-[3/4] overflow-hidden bg-[#F9F8F6] shadow-xl border border-black/5">
+                <img src={product.image} className="w-full h-full object-cover transition-transform duration-[4s] ease-out md:group-hover:scale-110" alt={product.title} />
                 <div className="absolute inset-0 bg-black/0 md:group-hover:bg-black/40 transition-all duration-700 flex items-center justify-center">
                    <button 
-                      onClick={() => navigateTo('shop')}
+                      onClick={() => openCheckout(product)}
                       className="px-8 py-3 bg-white text-black font-sans text-[9px] uppercase tracking-[0.4em] md:opacity-0 md:group-hover:opacity-100 md:translate-y-4 md:group-hover:translate-y-0 transition-all duration-700 hover:bg-[#C5A059] absolute bottom-8 md:static shadow-xl md:shadow-none"
                     >
-                       View Details & Shop
+                       View Details & Add to Cart
                     </button>
                 </div>
+                <div className="absolute top-6 left-6 font-mono text-[9px] uppercase tracking-[0.4em] text-black/20 md:hidden md:group-hover:block transition-opacity duration-700">EDITION.LIBRE</div>
               </div>
               <div className="mt-8 flex justify-between items-end">
                 <div className="space-y-1 text-left">
-                  <h3 className="font-serif text-2xl text-black tracking-tight uppercase leading-none">{art.title}</h3>
-                  <p className="font-mono text-[10px] uppercase tracking-widest text-black/30">{art.year}</p>
+                  <p className="font-mono text-[9px] uppercase tracking-[0.4em] text-[#C5A059]">Ref. {product.id?.slice(-6) || '000000'}</p>
+                  <h3 className="font-serif text-2xl text-black tracking-tight uppercase leading-none">{product.title}</h3>
+                </div>
+                <div className="text-right">
+                  <p className="font-mono text-xs tracking-[0.2em] text-[#8B5E3C] font-bold">${Number(product.price).toLocaleString()}</p>
                 </div>
               </div>
             </div>
-          ))}
+          ))
+          )}
         </motion.div>
 
         <div className="mt-12 md:mt-24 flex justify-center">
           <button 
             onClick={() => navigateTo('shop')}
-            className="flex items-center gap-6 text-black hover:text-[#C5A059] transition-colors group cursor-none"
+            className="group cursor-none bg-[#C5A059] hover:bg-white px-10 py-5 md:px-12 md:py-6 rounded-full shadow-[0_10px_30px_rgba(197,160,89,0.4)] hover:shadow-[0_10px_40px_rgba(255,255,255,0.5)] hover:-translate-y-1 transition-all duration-500 border border-black/10"
           >
-            <span className="font-sans text-xs md:text-sm uppercase tracking-[0.5em] font-semibold">VIEW THE SHOP</span>
-            <ArrowRight size={24} className="group-hover:translate-x-3 transition-transform duration-500" />
+            <span className="font-mono text-[20px] md:text-[22px] uppercase tracking-[0.3em] text-white group-hover:text-black transition-colors font-bold pl-[0.3em]">VIEW THE SHOP</span>
           </button>
         </div>
       </div>

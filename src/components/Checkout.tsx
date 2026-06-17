@@ -188,6 +188,14 @@ const CheckoutForm = ({ cartItems, form, setForm, onSubmit, setCheckoutStep, isS
     if (!isSimulated) {
       if (!stripe || !elements) return;
 
+      // Ensure elements validates the input before confirming
+      const { error: submitError } = await elements.submit();
+      if (submitError) {
+        setErrorMessage(submitError.message || "Please check your payment details.");
+        setCheckoutStep('form');
+        return;
+      }
+
       const { error, paymentIntent } = await stripe.confirmPayment({
         elements,
         confirmParams: {

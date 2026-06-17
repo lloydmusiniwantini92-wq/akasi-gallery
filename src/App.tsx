@@ -303,6 +303,7 @@ export default function App() {
               setHoveredId={setHoveredId}
               openCheckout={(item) => setSelectedProduct(item)}
               navigateTo={navigateTo}
+              products={products}
             />
           ) : view === 'shop' ? (
             <ShopView 
