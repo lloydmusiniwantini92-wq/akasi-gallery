@@ -36,7 +36,6 @@ export const ABOUT_IMAGES = {
 
 export const EXPERIMENTAL_GALLERY = [
   "/images/artwork/artwork-02.jpg",
-  "/images/artwork/artwork-07.jpg",
   "/images/artwork/artwork-08.jpg",
   "/images/artwork/artwork-09.jpg",
   "/images/artwork/artwork-10.jpg",

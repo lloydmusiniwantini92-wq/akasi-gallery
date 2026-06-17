@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Check, Mail, Globe, ArrowRight, ArrowLeft, Instagram, Linkedin, Twitter } from 'lucide-react';
+import { Check, Mail, Globe, ArrowRight, ArrowLeft, Instagram, Linkedin, Twitter, X } from 'lucide-react';
 import { IMAGES, HERO_SLIDES, ABOUT_IMAGES, EXPERIMENTAL_GALLERY } from '../constants/assets';
 import { MASTERPIECES, COLLECTIONS, EXHIBITIONS, HERO_SEQUENCE } from '../data/galleryData';
 import { PrivateViewOverlay } from '../components/PrivateViewOverlay';
@@ -22,9 +22,10 @@ interface HomeViewProps {
 }
 
 export const HomeView: React.FC<HomeViewProps> = ({ 
-  heroIndex, hoveredId, setHoveredId, openCheckout, navigateTo, products 
+  heroIndex, hoveredId, setHoveredId, openCheckout, navigateTo, products = [] 
 }) => {
-  const [activeAccordion, setActiveAccordion] = useState<number>(1);
+  const [activeAccordion, setActiveAccordion] = useState<number | null>(null);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [activeCarouselIndex, setActiveCarouselIndex] = useState<number>(2);
   const [quoteIndex, setQuoteIndex] = useState<number>(0);
 
@@ -120,15 +121,15 @@ export const HomeView: React.FC<HomeViewProps> = ({
         </motion.p>
       </div>
 
-      <div className="absolute bottom-12 w-full flex justify-center md:w-auto md:right-12 z-30 pointer-events-none">
+      <div className="absolute bottom-24 md:bottom-12 w-full flex justify-center md:w-auto md:right-12 z-30 pointer-events-none">
         <motion.button 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5, delay: 2, ease: [0.16, 1, 0.3, 1] }}
           onClick={() => navigateTo('shop')}
-          className="pointer-events-auto group cursor-none bg-[#C5A059] hover:bg-white px-10 py-5 md:px-12 md:py-6 rounded-full shadow-[0_10px_30px_rgba(197,160,89,0.4)] hover:shadow-[0_10px_40px_rgba(255,255,255,0.5)] hover:-translate-y-1 transition-all duration-500 border border-black/10"
+          className="pointer-events-auto group cursor-none bg-[#C5A059] hover:bg-white px-8 py-4 md:px-12 md:py-6 rounded-full shadow-[0_10px_30px_rgba(197,160,89,0.4)] hover:shadow-[0_10px_40px_rgba(255,255,255,0.5)] hover:-translate-y-1 transition-all duration-500 border border-black/10"
         >
-          <span className="font-mono text-[20px] md:text-[22px] uppercase tracking-[0.3em] text-white group-hover:text-black transition-colors font-bold pl-[0.3em]">Shop Now</span>
+          <span className="font-mono text-[16px] md:text-[22px] uppercase tracking-[0.3em] text-white group-hover:text-black transition-colors font-bold pl-[0.3em]">Shop Now</span>
         </motion.button>
       </div>
     </section>
@@ -191,8 +192,9 @@ export const HomeView: React.FC<HomeViewProps> = ({
               Through hybrid, symbolic figures and layered compositions, she transforms uncertainty into opportunities for self-definition with optimism.
             </p>
           </EditorialReveal>
+          <PrivateViewOverlay />
         </div>
-        
+
         <EditorialReveal delay={0.5}>
           <div className="flex justify-center md:justify-start mt-16 md:ml-12 w-full">
             <button 
@@ -339,7 +341,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
             className="flex overflow-x-auto snap-x snap-mandatory md:overflow-hidden md:flex-row h-[400px] md:h-[650px] gap-4 mb-16 md:mb-24 scrollbar-hide pb-8 md:pb-0" 
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
-             {[...COLLECTIONS.map(c => c.img), ...EXPERIMENTAL_GALLERY, IMAGES.studio3].map((img, i) => {
+             {EXPERIMENTAL_GALLERY.map((img, i) => {
                const isActive = activeAccordion === i;
                return (
                  <div 
@@ -365,8 +367,11 @@ export const HomeView: React.FC<HomeViewProps> = ({
                                <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-[#C5A059] mb-2 drop-shadow-md">Curated Study 00{i+1}</p>
                                <p className="font-serif text-2xl md:text-4xl text-white italic tracking-tighter drop-shadow-lg">Archive File</p>
                              </div>
-                             <button className="shrink-0 px-4 md:px-6 py-3 md:py-4 border border-white/20 text-white font-sans text-[9px] uppercase tracking-widest hover:bg-white hover:text-black transition-colors cursor-none backdrop-blur-sm">
-                               Unlock
+                             <button 
+                               onClick={() => setSelectedImage(img)}
+                               className="shrink-0 px-4 md:px-6 py-3 md:py-4 border border-white/20 text-white font-sans text-[9px] uppercase tracking-widest hover:bg-white hover:text-black transition-colors cursor-none backdrop-blur-sm"
+                             >
+                               VIEW
                              </button>
                            </motion.div>
                          )}
@@ -382,6 +387,35 @@ export const HomeView: React.FC<HomeViewProps> = ({
     {/* DELETED SECTIONS 5 & 6 */}
 
     {/* DELETED SECTION 7 */}
+      {/* Image Modal */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[5000] flex items-center justify-center bg-black/95 p-4 md:p-12 backdrop-blur-md"
+            onClick={() => setSelectedImage(null)}
+          >
+            <button 
+              className="absolute top-4 right-4 md:top-8 md:right-8 text-white/50 hover:text-white transition-colors cursor-pointer p-2 bg-black/50 rounded-full"
+              onClick={() => setSelectedImage(null)}
+            >
+              <X size={32} />
+            </button>
+            <motion.img 
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              src={selectedImage} 
+              className="max-w-full max-h-full object-contain shadow-2xl" 
+              alt="Expanded Archive"
+              onClick={(e) => e.stopPropagation()} 
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
   </>
   );
 };

@@ -27,7 +27,7 @@ export const Splashscreen: React.FC = () => (
         <div className="w-16 h-16 md:w-24 md:h-24 relative">
           <img 
             src={IMAGES.logoMark} 
-            className="w-full h-full object-contain" 
+            className="w-full h-full object-contain brightness-0" 
             style={{ clipPath: 'polygon(0% 0%, 80% 0%, 80% 20%, 100% 20%, 100% 100%, 0% 100%)' }}
             alt="Logo Mark" 
           />
@@ -35,7 +35,7 @@ export const Splashscreen: React.FC = () => (
         <div className="w-48 md:w-64 overflow-hidden relative">
           <img 
             src={IMAGES.logoType} 
-            className="w-full h-full object-contain" 
+            className="w-full h-full object-contain brightness-0" 
             alt="Logo Type" 
           />
         </div>
