@@ -361,9 +361,9 @@ export const HomeView: React.FC<HomeViewProps> = ({
                              transition={{ duration: 0.5, delay: 0.2 }}
                              className="w-full flex flex-col md:flex-row justify-between items-start md:items-end gap-6"
                            >
-                             <div className="text-left w-full overflow-hidden">
+                             <div className="text-left w-full">
                                <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-[#C5A059] mb-2 drop-shadow-md">Curated Study 00{i+1}</p>
-                               <p className="font-serif text-2xl md:text-5xl text-white italic tracking-tighter drop-shadow-lg whitespace-nowrap">Archive File</p>
+                               <p className="font-serif text-2xl md:text-4xl text-white italic tracking-tighter drop-shadow-lg">Archive File</p>
                              </div>
                              <button className="shrink-0 px-4 md:px-6 py-3 md:py-4 border border-white/20 text-white font-sans text-[9px] uppercase tracking-widest hover:bg-white hover:text-black transition-colors cursor-none backdrop-blur-sm">
                                Unlock
