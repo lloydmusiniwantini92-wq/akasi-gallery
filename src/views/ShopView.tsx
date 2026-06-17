@@ -35,9 +35,12 @@ export const ShopView: React.FC<ShopViewProps> = ({ products, repoStatus, onSele
         </EditorialReveal>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-24">
+      <div 
+        className="flex overflow-x-auto snap-x snap-mandatory md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-x-12 md:gap-y-24 pb-12 md:pb-0 scrollbar-hide -mx-8 px-8 md:mx-0 md:px-0"
+        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+      >
         {products.length === 0 ? (
-          <div className="col-span-1 md:col-span-2 lg:col-span-3 text-center py-24">
+          <div className="w-full md:col-span-2 lg:col-span-3 text-center py-24">
             <p className="font-mono text-xs uppercase tracking-widest text-black/40 animate-pulse">
               Synchronizing with Printify Archive...
             </p>
@@ -50,7 +53,7 @@ export const ShopView: React.FC<ShopViewProps> = ({ products, repoStatus, onSele
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, margin: "-15%" }}
               transition={{ duration: 1.5, delay: (i % 3) * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="group cursor-none"
+              className="group cursor-none flex-none w-[80vw] md:w-auto snap-center"
             >
               <div className="aspect-[3/4] bg-[#F9F8F6] overflow-hidden relative border border-black/5 shadow-xl group-hover:shadow-2xl transition-all duration-700">
                 <img src={product.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[4s] ease-out" alt={product.title} />

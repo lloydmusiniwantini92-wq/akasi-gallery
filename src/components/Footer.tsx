@@ -46,7 +46,7 @@ export const Footer: React.FC<FooterProps> = ({ navigateTo }) => (
         </div>
       </div>
       
-      <div className="md:col-span-7 grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-12 md:gap-16">
+      <div className="md:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-16">
         <div className="space-y-8">
           <p className="font-mono text-[9px] uppercase tracking-[0.4em] text-[#8B5E3C]">The Gallery</p>
           <div className="flex flex-col gap-4">
@@ -75,14 +75,16 @@ export const Footer: React.FC<FooterProps> = ({ navigateTo }) => (
       </div>
     </div>
     
-    <div className="max-w-7xl mx-auto mt-48 pt-12 border-t border-black/5 flex flex-col md:flex-row justify-between items-center gap-12 relative z-10">
-      <p className="font-mono text-[9px] uppercase tracking-[0.5em] text-black/50 text-center md:text-left">© 2026 Akasis Gallery. All Narrative Rights Reserved.</p>
-      <div className="flex gap-12 items-center">
+    <div className="max-w-7xl mx-auto mt-32 md:mt-48 pt-12 border-t border-black/5 flex flex-col md:flex-row justify-between items-center gap-12 relative z-10">
+      <p className="font-mono text-[9px] uppercase tracking-[0.5em] text-black/50 text-center md:text-left leading-relaxed">
+        © 2026 Akasis Gallery.<br className="md:hidden" /> All Narrative Rights Reserved.
+      </p>
+      <div className="flex flex-col md:flex-row gap-6 md:gap-12 items-center text-center">
         <div className="flex items-center gap-4 text-black/50">
           <Globe size={14} />
           <span className="font-mono text-[9px] uppercase tracking-widest">Global Delivery</span>
         </div>
-        <div className="w-12 h-px bg-black/5" />
+        <div className="hidden md:block w-12 h-px bg-black/5" />
         <p className="font-mono text-[9px] uppercase tracking-widest text-black/50 italic">Engineered by Arson Pixelz</p>
       </div>
     </div>
